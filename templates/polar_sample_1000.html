@@ -55,16 +55,18 @@
       .attr("height", height)
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-/*
+
     var gr = svg.append("g")
       .attr("class", "r axis")
       .selectAll("g")
-      .data(r.ticks(3).slice(1))
+      .data(r.ticks(3))
       .enter().append("g");
 
     gr.append("circle")
       .attr("r", r);
-*/
+
+
+/*
     var ga = svg.append("g")
       .attr("class", "a axis")
       .selectAll("g")
@@ -76,7 +78,7 @@
 
     ga.append("line")
       .attr("x2", radius);
-      
+*/
     var color = d3.scale.category20();
 
     var line = d3.svg.line.radial()
