@@ -42,7 +42,6 @@
 
     var line = d3.svg.line.radial()
       .radius(function(d) {
-        console.log("here");
         return r(d[1]);
       })
       .angle(function(d) {
