@@ -7,6 +7,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/sunburst')
+def sunburst():
+    return render_template('sunburst.html')
+
+
 @app.route('/mult_sliders')
 def mult_sliders():
     return render_template('mult_sliders.html')
@@ -21,6 +26,9 @@ def polar():
 def polar_sample():
     return render_template('polar_sample_1000.html')
 
+@app.route('/polar_sample_10000')
+def polar_sample_10000():
+    return render_template('polar_sample_10000.html')
 
 @app.route('/slider')
 def slider():
