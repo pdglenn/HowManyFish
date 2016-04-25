@@ -1,6 +1,10 @@
 <!- http://stackoverflow.com/questions/33695073/javascript-polar-scatter-plot-using-d3-js -->
 <!DOCTYPE html>
 <meta charset="utf-8">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
 <style>
   .frame {
     fill: none;
@@ -32,12 +36,15 @@
 
 
 <body>
+    <div id="slider" width=100 height =200 style="float:right"></div>
     <script type=text/javascript>
       $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
     </script>
-  <button onclick="update(500)">Click me</button>
+
   <script src="//d3js.org/d3.v3.min.js"></script>
   <script>
+
     var width = 1000,
       height = 1000,
       radius = Math.min(width, height) / 2 - 30;
@@ -156,4 +163,18 @@
 
     update(500);
 
+            $(function() {
+        $( "#slider" ).slider({
+          orientation: "vertical",
+          min: 100,
+          max: 5000,
+          value: 500,
+          change: function( event, ui ){
+            update(ui.value);
+          }
+        });
+      });
+
   </script>
+
+    </body>
