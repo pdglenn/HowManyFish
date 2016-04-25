@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, render_template, request
+import random
+
 app = Flask(__name__)
 
 
@@ -35,17 +37,19 @@ def slider():
     return render_template('slider.html')
 
 
-@app.route('/_calc_similarity')
+@app.route('/_add_numbers')
 def add_numbers():
-    a = request.args.get('a', 0, type=int)
-    b = request.args.get('b', 0, type=int)
-    return jsonify(result=a + b)
+    num = request.args.get('num', 100, type=int)
+    return jsonify(data=[random.random() * 100 for x in range(num)])
 
 
 @app.route('/ajax_test')
 def ajax_test():
     return render_template('ajax_test.html')
 
+@app.route('/ajax_test2')
+def ajax_test2():
+    return render_template('ajax_test2.html')
 
 if __name__ == '__main__':
     app.debug = True

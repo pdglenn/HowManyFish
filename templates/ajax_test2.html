@@ -30,8 +30,12 @@
   }
 </style>
 
+
 <body>
-  <button onclick="update()">Click me</button>
+    <script type=text/javascript>
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+  <button onclick="update(500)">Click me</button>
   <script src="//d3js.org/d3.v3.min.js"></script>
   <script>
     var width = 1000,
@@ -89,43 +93,67 @@
         return -d[0] + Math.PI / 2;
       });
       
-    function getData(){
-      var data3 = [];
-      for (var i = 0; i < 10000; i++){
-        data3.push(Math.random() * 100);
-      }
-      return data3;
+    // function getData(){
+    //   var data3 = [];
+    //   for (var i = 0; i < 1000; i++){
+    //     data3.push(Math.random() * 100);
+    //   }
+    //   return data3;
+    // };
+
+    function update(num){
+      d3.json($SCRIPT_ROOT + '/_add_numbers?num='+num, function(error, data) {
+        updateWithData(data.data);
+      });
     };
 
-    function update(){
-      var data = getData();
-      var svg = d3.selectAll(".point").data(data);
+    function updateWithData(data){
+      console.log('updating');
+      //console.log(data);
+      var circles = svg.selectAll("circle.point").data(data);
+      console.log(data.length)
 
-       svg.transition()
-        .duration(750)
+      circles.enter()
+        .append("circle")
+        .attr("class", "point")
+        .attr("r", 0)
+        .attr("fill",function(d,i){
+          return color(i);
+        })
+        .attr("transform", function(d, i) {
+          var coors = line([[i, 0]]).slice(1).slice(0, -1);
+          return "translate(" + coors + ")"
+        })
+        .transition()
+          .duration(1500)
+          .attr("r", 2) 
+          .attr("transform", function(d, i) {
+            var coors = line([[i, d]]).slice(1).slice(0, -1);
+            return "translate(" + coors + ")"
+          })
+
+
+       circles.transition()
+        .duration(1500)
         .attr("transform", function(d, i) {
           var coors = line([[i, d]]).slice(1).slice(0, -1);
           return "translate(" + coors + ")"
         })
-        .attr("r", 2);  
+        .attr("r", 2);
+
+
+
+        circles.exit()
+          .transition()
+          .duration(1500)
+          .attr("transform", function(d, i) {
+            var coors = line([[i, 0]]).slice(1).slice(0, -1);
+            return "translate(" + coors + ")"
+          })
+          .attr("r", 0)
+          .remove();  
     };
 
-    svg.selectAll("point")
-      .data(getData())
-      .enter()
-      .append("circle")
-      .attr("class", "point")
-      .attr("transform", function(d, i) {
-        var coors = line([[i, d]]).slice(1).slice(0, -1);
-        return "translate(" + coors + ")"
-      })
-      .attr("r", 1)
-      .attr("fill",function(d,i){
-        return color(i);
-      
-      });
+    update(500);
 
-
-   
-console.log("here");
   </script>
