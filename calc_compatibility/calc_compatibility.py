@@ -47,7 +47,7 @@ def calc_similarity(A_preferences, B_answers, A_importances):
 				points_possible += A_importances[i]
 			else:
 				points_possible += A_importances[i]
-	return points/points_possible
+		return points/points_possible
 
 
 	###Alternative using numpy arrays (But, this is slower)
@@ -57,10 +57,10 @@ def calc_similarity(A_preferences, B_answers, A_importances):
 
 
 def write_to_json(people_compatibility):
-	'''Takes in a dataframe and writes it to a json file
+	'''Takes in json and writes it to a file
 	'''
 	with open('compatibility_match', 'w') as outfile:
-		outfile.write(people_compatibility.to_json(orient='records'))
+		outfile.write(people_compatibility)
 
 
 ##############################################################################
@@ -68,6 +68,7 @@ def main():
 
 	people = match_compatibility()
 	people_compatibility = people[['username', 'compatibility']]
+	people_compatibility = people_compatibility.to_json(orient='records')
 	write_to_json(people_compatibility)
 	return people_compatibility
 

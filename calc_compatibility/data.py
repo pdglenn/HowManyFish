@@ -11,13 +11,13 @@ user_preferences = ['yes', 'no', 'no', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'n
 
 ####### User importance levels need to be sent in from ajax request instead of hardcoded
 user_importances = [250, 10, 1, 0, 10, 250, 10, 10, 1, 1]  
-similarity_threshold = .8
+compatibility_threshold = .9
 
 #Read in question answers, preferences, and importance level of potential matches from csv
 
 #Open csv
 import pandas as pd 
-people = pd.read_csv('fake_data_clean.csv')
+people = pd.read_csv('fake_data_clean.csv', low_memory=False)
 
 
 
