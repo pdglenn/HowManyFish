@@ -22,7 +22,13 @@ def ethnicity_stats(people_filtered):
 	category_counts = people_filtered.ethnicity_norm.value_counts(normalize = True) #Normalize used to get proportions (instead of frequencies)
 	category_counts = category_counts.to_dict()  #Convert to dictionary 
 	category_counts['not answered'] = category_counts.pop('-1') #Rename missing data
-	return category_counts
+
+	category_counts_granular = people_filtered.ethnicity.value_counts(normalize = True)
+	category_counts_granular = category_counts_granular.to_dict()
+	to_remove = ['hispanic / latin', 'other', '-1', 'white', 'asian', 'black']
+	for ethn in to_remove:
+		category_counts_granular.pop(ethn)
+	return category_counts, category_counts_granular
 
 def height_stats(people_filtered):
 	people_filtered['height'] = people_filtered['height'].convert_objects(convert_numeric=True)
@@ -97,13 +103,14 @@ def profile_stats(people_filtered):
 	and returns the json of profile stats. 
 	'''
 	profile_stats = {}
-	profile_stats['ethnicity'] = ethnicity_stats(people_filtered)
+	profile_stats['ethnicity'], profile_stats['ethnicity_2ormore'] = ethnicity_stats(people_filtered)
 	profile_stats['height'] = height_stats(people_filtered)
 	profile_stats['education'] = education_stats(people_filtered)
 	profile_stats['age'] = age_stats(people_filtered)
 	profile_stats['bodytype'] = bodytype_stats(people_filtered)
 	profile_stats_json = json.dumps(profile_stats, indent = 4)
 	return profile_stats_json
+
 
 def write_to_json(profile_stats_json):
 	'''Takes in profile stats and writes to json file.
@@ -113,11 +120,16 @@ def write_to_json(profile_stats_json):
 
 
 ##############################################################################
-def main():  
+def main(): 
+
+
 	people = match_compatibility()
+	people = normalize_people(people)
 	people_filtered = matches_above_compatibility_threshold(compatibility_threshold, people)
+
 	profile_stats_json = profile_stats(people_filtered)
 	write_to_json(profile_stats_json)
+	return profile_stats_json
 
 if __name__ == '__main__':
 	main()

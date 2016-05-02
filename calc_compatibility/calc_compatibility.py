@@ -55,10 +55,56 @@ def calc_similarity(A_preferences, B_answers, A_importances):
 	# points = question_matches*A_importances
 	# return sum(points)/sum(A_importances)
 
+def normalize_people(people):
+	#normalize height
+	people['height'] = people['height'].convert_objects(convert_numeric=True)
+	people['height_norm'] = None
+	people['height_norm'][people['height'] < 60] = "under 5'"
+	people['height_norm'][(people['height'] >= 60) & (people['height'] < 66)] = "5' to 5'5"
+	people['height_norm'][(people['height'] >= 66) & (people['height'] < 72)] = "5'6 to 5'11"
+	people['height_norm'][people['height'] >= 72] = "over 6'"
+	people['height_norm'][people['height'] == -1] = "not answered"
+	print(people['height_norm'])
+
+	#normalize education
+	m = {"high school": ["working on high school", "dropped out of high school", "high school", "graduated from high school"], 
+		"some college": ["dropped out of two-year college", "working on two-year college", "two-year college", "dropped out of college/university", "graduated from two-year college"], 
+		"bachelors degree": ["college/university", "working on college/university",  "dropped out of masters program", "graduated from college/university"], 
+		"advanced degree": ["masters program", "graduated from law school", "graduated from med school", "dropped out of ph.d program", "working on masters program", "ph.d program", "working on law school", "graduated from ph.d program", "working on med school", "graduated from masters program", "working on ph.d program"], 
+		"not answered": ["dropped out of space camp",  "graduated from space camp",  "working on space camp", "space camp", "-1"]}
+	m2 = {v: k for k, vv in m.items() for v in vv}
+	people['education'] = people.education.map(m2).astype("category", categories=set(m2.values()))
+	people['education'] = people['education'].fillna(value='not answered')
+	# pd.set_option('display.height', 60000)
+	# print(people['education'])
+
+	#normalize body type
+	m = {"thin": ["skinny", "thin"],
+		"ripped": ["fit", "athletic", "jacked"], 
+		"average": ["average"], 
+		"a little extra": ["used up", "a little extra", "full figured", "curvy", "overweight"], #what does 'used up' mean??
+		"not answered": ["-1", "rather not say", " emotional responsibility"]
+		}
+	m2 = {v: k for k, vv in m.items() for v in vv}
+	people['body_type'] = people.body_type.map(m2).astype("category", categories=set(m2.values()))
+	people['body_type'].fillna(value='not answered')
+
+	#normalize age
+	people['age'] = people['age'].convert_objects(convert_numeric=True)
+	people['age_norm'] = None
+	people['age_norm'][(people['age'] >= 18) & (people['age'] <= 25)] = '18 to 25'
+	people['age_norm'][(people['age'] > 25) & (people['age'] <= 35)] = '26 to 35'
+	people['age_norm'][(people['age'] > 35) & (people['age'] <= 45)] = '36 to 45'
+	people['age_norm'][people['age'] > 45] = 'over 45'
+	people['age_norm'][people['age'] == -1] = "not answered"
+
+	return people
+
 
 def write_to_json(people_compatibility):
 	'''Takes in json and writes it to a file
 	'''
+	print('made it here!')
 	with open('compatibility_match', 'w') as outfile:
 		outfile.write(people_compatibility)
 
@@ -67,9 +113,16 @@ def write_to_json(people_compatibility):
 def main():  
 
 	people = match_compatibility()
-	people_compatibility = people[['username', 'compatibility']]
-	people_compatibility = people_compatibility.to_json(orient='records')
+	people = normalize_people(people)
+	# people_compatibility = people[['username', 'compatibility', 'ethnicity_norm', 'body_type_norm', 'height_norm', 'age_norm', 'education_norm']]
+	people_compatibility = people[['username', 'education']] ###Problem occuring for education and body_type
+	print(people_compatibility)
+	people_compatibility = people_compatibility.to_json(orient="records")
+	# people_compatibility = people_compatibility.to_json()
+	# people_compatibility = people_compatibility.to_dict()
+	# people_compatibility = dumps(people_compatibility, indent = 4)
 	write_to_json(people_compatibility)
+	print('here')
 	return people_compatibility
 
 if __name__ == '__main__':
