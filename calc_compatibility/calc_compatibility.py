@@ -73,8 +73,9 @@ def normalize_people(people):
 		"advanced degree": ["masters program", "graduated from law school", "graduated from med school", "dropped out of ph.d program", "working on masters program", "ph.d program", "working on law school", "graduated from ph.d program", "working on med school", "graduated from masters program", "working on ph.d program"], 
 		"not answered": ["dropped out of space camp",  "graduated from space camp",  "working on space camp", "space camp", "-1"]}
 	m2 = {v: k for k, vv in m.items() for v in vv}
-	people['education'] = people.education.map(m2).astype("category", categories=set(m2.values()))
-	people['education'] = people['education'].fillna(value='not answered')
+	people['education_norm'] = people.education.map(m2).astype("category", categories=set(m2.values()))
+	people['education_norm'] = people.education_norm.astype('object')
+	people['education_norm'] = people['education_norm'].fillna(value='not answered')
 	# pd.set_option('display.height', 60000)
 	# print(people['education'])
 
@@ -86,8 +87,9 @@ def normalize_people(people):
 		"not answered": ["-1", "rather not say", " emotional responsibility"]
 		}
 	m2 = {v: k for k, vv in m.items() for v in vv}
-	people['body_type'] = people.body_type.map(m2).astype("category", categories=set(m2.values()))
-	people['body_type'].fillna(value='not answered')
+	people['body_type_norm'] = people.body_type.map(m2).astype("category", categories=set(m2.values()))
+	people['body_type_norm'] = people.body_type_norm.astype('object')
+	people['body_type_norm'].fillna(value='not answered')
 
 	#normalize age
 	people['age'] = people['age'].convert_objects(convert_numeric=True)
@@ -114,16 +116,10 @@ def main():
 
 	people = match_compatibility()
 	people = normalize_people(people)
-	# people_compatibility = people[['username', 'compatibility', 'ethnicity_norm', 'body_type_norm', 'height_norm', 'age_norm', 'education_norm']]
-	people_compatibility = people[['username', 'education']] ###Problem occuring for education and body_type
-	print(people_compatibility)
+	people_compatibility = people[['username', 'compatibility', 'ethnicity_norm', 'body_type_norm', 'height_norm', 'age_norm', 'education_norm']] ###Problem occuring for education and body_type
 	people_compatibility = people_compatibility.to_json(orient="records")
-	# people_compatibility = people_compatibility.to_json()
-	# people_compatibility = people_compatibility.to_dict()
-	# people_compatibility = dumps(people_compatibility, indent = 4)
 	write_to_json(people_compatibility)
-	print('here')
-	return people_compatibility
+
 
 if __name__ == '__main__':
     main()
