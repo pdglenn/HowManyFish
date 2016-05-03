@@ -39,7 +39,7 @@ def calc_similarity(A_preferences, B_answers, A_importances):
 	relation to person B and returns the percentage. 
 	'''
 	if len(A_preferences) != len(B_answers) != len(A_importances):
-		print('The questions from user and person are not the same.')
+		#print('The questions from user and person are not the same.')
 		return
 	else:
 		points = 0 #numerator
@@ -67,7 +67,7 @@ def normalize_people(people):
 	people['height_norm'][(people['height'] >= 66) & (people['height'] < 72)] = "5'6 to 5'11"
 	people['height_norm'][people['height'] >= 72] = "over 6'"
 	people['height_norm'][people['height'] == -1] = "not answered"
-	print(people['height_norm'])
+	#print(people['height_norm'])
 
 	#normalize education
 	m = {"high school": ["working on high school", "dropped out of high school", "high school", "graduated from high school"], 
