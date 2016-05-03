@@ -1,17 +1,198 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>How Many Fish?</title>
-</head>
-<body>
 
-    <a href="/ajax_test">Ajax Test</a><br>
-    <a href="/mult_sliders">Multiple Sliders</a><br>
-    <a href="/polar">Polar coordinates test</a><br>
-    <a href="/polar_sample_10000">Polar coordinates with 10,000 items</a><br>
-    <a href="polar_sample_1000">Polar coordinates with 1,000 items</a><br>
-    <a href="slider">Slider testing</a><br>
-    <a href="/sunburst">Sunburst</a><br>
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" />
+    <title>How Many Fish?</title>
+    
+    <!-- Create a link to the main.css stylesheet -->
+    <link rel="stylesheet" href="static/_css/main.css" type="text/css" />
+    <!-- Create a link to the bootstrap -->
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.css" /> 
+
+</head>
+
+<body>
+  <div class="container-fluid" id="container">
+    <!-- Title row -->
+    <div class="row">
+      <div class="col-md-12" id="topTitle">
+        <h1 id="topHeader">How Many Fish?</h1>
+      </div>
+    </div>
+    <!-- Large containers row -->
+    <div class="row">
+      <div class="col-md-7" id="scatter_container">
+        <div class="row">
+          <div class="col-md-12" id="scatter_title">
+          <h4 id="scatterHeader">Your Pool</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" id="scatter_plot">
+            SCATTER PLOT <br>
+            <p align=center>
+            <img src="http://www.dogoilpress.com/data/wallpapers/26/FDS_568904.jpg" width=425 height=425>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5" id="sliders_bars_container">
+        <!--Slider container row -->
+        <div class="row">
+          <div class="col-md-12" id="sliders_title">
+            <h4 id="slidersHeader">Question Importance Sliders</h4>
+          </div>
+          <div class="col-md-12" id="sliders_container">
+            <div class="row">
+              <div class="col-md-6" id="slider1">
+                SLIDER1
+              </div>
+              <div class="col-md-6" id="slider2">
+                SLIDER2
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider1_title">
+                <h5>SLIDER1 NAME</h5>
+              </div>
+              <div class="col-md-6" id="slider2_title">
+                <h5>SLIDER2 NAME</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider3">
+                SLIDER3
+              </div>
+              <div class="col-md-6" id="slider4">
+                SLIDER4
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider3_title">
+                <h5>SLIDER3 NAME</h5>
+              </div>
+              <div class="col-md-6" id="slider4_title">
+                <h5>SLIDER4 NAME</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider5">
+                SLIDER5
+              </div>
+              <div class="col-md-6" id="slider6">
+                SLIDER6
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider5_title">
+                <h5>SLIDER5 NAME</h5>
+              </div>
+              <div class="col-md-6" id="slider6_title">
+                <h5>SLIDER6 NAME</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider7">
+                SLIDER7
+              </div>
+              <div class="col-md-6" id="slider8">
+                SLIDER8
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider7_title">
+                <h5>SLIDER7 NAME</h5>
+              </div>
+              <div class="col-md-6" id="slider8_title">
+                <h5>SLIDER8 NAME</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider9">
+                SLIDER9
+              </div>
+              <div class="col-md-6" id="slider10">
+                SLIDER10
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="slider9_title">
+                <h5>SLIDER9 NAME</h5>
+              </div>
+              <div class="col-md-6" id="slider10_title">
+                <h5>SLIDER10 NAME</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Bars container row -->
+        <div class="row">
+          <div class="col-md-12" id="bars_title">
+            <h4 id="barsHeader">Pool Statistics</h4>
+          </div>
+          <div class="col-md-12" id="bars_container">
+            <div class="row">
+              <div class="col-md-3" id="bar1">
+                BAR1
+              </div>
+              <div class="col-md-3" id="bar2">
+                BAR2
+              </div>
+              <div class="col-md-3" id="bar3">
+                BAR3
+              </div>
+              <div class="col-md-3" id="bar4">
+                BAR4
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3" id="bar1_title">
+                <h5>BAR1 NAME</h5>
+              </div>
+              <div class="col-md-3" id="bar2_title">
+                <h5>BAR2 NAME</h5>
+              </div>
+              <div class="col-md-3" id="bar3_title">
+                <h5>BAR3 NAME</h5>
+              </div>
+              <div class="col-md-3" id="bar4_title">
+                <h5>BAR4 NAME</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3" id="bar5">
+                BAR5
+              </div>
+              <div class="col-md-3" id="bar6">
+                BAR6
+              </div>
+              <div class="col-md-3" id="bar7">
+                BAR7
+              </div>
+              <div class="col-md-3" id="bar8">
+                BAR8
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3" id="bar5_title">
+                <h5>BAR5 NAME</h5>
+              </div>
+              <div class="col-md-3" id="bar6_title">
+                <h5>BAR6 NAME</h5>
+              </div>
+              <div class="col-md-3" id="bar7_title">
+                <h5>BAR7 NAME</h5>
+              </div>
+              <div class="col-md-3" id="bar8_title">
+                <h5>BAR8 NAME</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
+
 </html>

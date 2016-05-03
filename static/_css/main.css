@@ -1,0 +1,81 @@
+/* ---------------------------------------------------------------------------------------------------- */
+/* RESET CSS */
+
+/* 0. Resetting css is highly recommended; this overrides some default browser styles and allows you to 
+start from a "blank slate". See this page for more information (http://cssreset.com/) and copy in one
+of the versions below. */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+/* GENERAL STYLES */
+
+/* 1. Set the page background to a color (ex. #eee for light gray) or to a background image.
+/* 2. Define the text font, size, color, boldness, and line height that will apply to the whole page. */
+body {
+    background: #eee;
+    color: #222;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+h1, h2, h3, h4, h5 {
+    text-align: center;
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+/* STRUCTURE */
+
+#container{
+    background: #eee;
+}
+
+div[class^="col-md"] {
+    background: #bce2ff;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: #eee;
+}
+
