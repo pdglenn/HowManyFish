@@ -5,7 +5,7 @@ from json import dumps, load
 from math import sqrt
 import numpy as np
 
-def match_compatibility():
+def match_compatibility(user_answers, user_preferences, user_importances):
 	'''Using Okcupid's algorithm, return a dataframe with 'compatibility' column added.
 
 	Note, more metrics can be added to each person's dictionary later.'''
@@ -14,11 +14,13 @@ def match_compatibility():
 	# people['person_preferences'] = people.apply(lambda x: [[x.Q1_preference, x.Q2_preference, x.Q3_preference, x.Q4_preference, x.Q5_preference, x.Q6_preference, x.Q7_preference, x.Q8_preference, x.Q9_preference, x.Q10_preference]], axis = 1)
 	# people['person_importances'] = people.apply(lambda x: [[x.Q1_importance, x.Q2_importance, x.Q3_importance, x.Q4_importance, x.Q5_importance, x.Q6_importance, x.Q7_importance, x.Q8_importance, x.Q9_importance, x.Q10_importance]], axis = 1)
 	# people['compatibility'] = np.vectorize(calc_compatibility)(people['person_answers'], people['person_preferences'], people['person_importances'])
-	people['compatibility'] = np.vectorize(calc_compatibility)(people['answers'], people['preferences'], people['importances'])
+	vec = np.vectorize(calc_compatibility, excluded=['user_answers', 'user_preferences', 'user_importances'])
+	# people['compatibility'] = np.vectorize(calc_compatibility, excluded=['user_answers', 'user_preferences', 'user_importances'])(people['answers'], people['preferences'], people['importances'], user_answers, user_preferences, user_importances)
+	people['compatibility'] = vec(person_answers = people['answers'], person_preferences = people['preferences'], person_importances = people['importances'], user_answers = user_answers, user_preferences=user_preferences, user_importances=user_importances)
 
 	return people
 
-def calc_compatibility(person_answers, person_preferences, person_importances):
+def calc_compatibility(person_answers, person_preferences, person_importances, user_answers, user_preferences, user_importances):
 	'''Calculates the match compatibility between a potential match (person) and the user.
 	'''
 	person_answers = person_answers.split(',')
@@ -99,27 +101,34 @@ def normalize_people(people):
 	people['age_norm'][(people['age'] > 35) & (people['age'] <= 45)] = '36 to 45'
 	people['age_norm'][people['age'] > 45] = 'over 45'
 	people['age_norm'][people['age'] == -1] = "not answered"
-
 	return people
 
 
 def write_to_json(people_compatibility):
 	'''Takes in json and writes it to a file
 	'''
-	print('made it here!')
 	with open('compatibility_match', 'w') as outfile:
 		outfile.write(people_compatibility)
 
+def get_compatibility_json(user_answers, user_preferences, user_importances):
+	people_w_comp = match_compatibility(user_answers, user_preferences, user_importances)
+	people_w_comp_prof = normalize_people(people_w_comp)
+	people_for_json = people_w_comp_prof[['username', 'compatibility', 'ethnicity_norm', 'body_type_norm', 'height_norm', 'age_norm', 'education_norm']]
+	people_as_json = people_for_json.to_json(orient="records")
+	# write_to_json(people_as_json) #Uncomment for debugging
+	people_for_aggregate = people_w_comp_prof[['username', 'compatibility', 'ethnicity_norm', 'ethnicity', 'height_norm', 'education_norm', 'age_norm', 'body_type_norm']]
+
+	#Reutrn json and return people_w_comp_prof dataframe to be fed into aggregate
+	return people_as_json, people_for_aggregate
 
 ##############################################################################
-def main():  
-
-	people = match_compatibility()
-	people = normalize_people(people)
-	people_compatibility = people[['username', 'compatibility', 'ethnicity_norm', 'body_type_norm', 'height_norm', 'age_norm', 'education_norm']] ###Problem occuring for education and body_type
-	people_compatibility = people_compatibility.to_json(orient="records")
-	write_to_json(people_compatibility)
-
+def main(): 
+	#These will be used fed into get_compatibility_json
+	user_answers = ['Arrogance', 'Rarely/Never', 'Witty/tongue in cheek', 'Yes', 'Average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
+	user_preferences = ['Immaturity', 'Sometimes', 'Sarcastic', 'No', 'Below average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
+	user_importances = [250, 10, 1, 0, 10, 250, 10, 10, 1, 1]
+	
+	return get_compatibility_json(user_answers, user_preferences, user_importances)
 
 if __name__ == '__main__':
     main()
