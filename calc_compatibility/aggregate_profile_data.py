@@ -70,18 +70,31 @@ def write_to_json(profile_stats_json):
 	with open('profile_stats', 'w') as outfile:
 		outfile.write(profile_stats_json)
 
+def get_aggregate_json(compatibility_threshold, people_for_aggregate):
+	'''Pass in compatibility_threshold, a user specified (by the slider threshold)
+
+	people_for_aggregate is a normalized DataFrame returned from get_compatibility_json()
+	with all of the data necessary to get aggregated statistics. 
+
+	Returns json with aggregated stats
+	'''
+	people_filtered = matches_above_compatibility_threshold(compatibility_threshold, people_for_aggregate)
+	profile_aggr_stats_json = profile_stats(people_filtered)
+	write_to_json(profile_aggr_stats_json)
+	return profile_aggr_stats_json
+
 
 ##############################################################################
 def main(): 
+	user_answers = ['Arrogance', 'Rarely/Never', 'Witty/tongue in cheek', 'Yes', 'Average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
+	user_preferences = ['Immaturity', 'Sometimes', 'Sarcastic', 'No', 'Below average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
+	user_importances = [250, 10, 1, 0, 10, 250, 10, 10, 1, 1]
 
+	compatibility_threshold = .9
 
-	people = match_compatibility()
-	people = normalize_people(people)
-	people_filtered = matches_above_compatibility_threshold(compatibility_threshold, people)
+	people_as_json, people_for_aggregate = get_compatibility_json(user_answers, user_preferences, user_importances)
+	return get_aggregate_json(compatibility_threshold, people_for_aggregate)
 
-	profile_stats_json = profile_stats(people_filtered)
-	write_to_json(profile_stats_json)
-	return profile_stats_json
 
 if __name__ == '__main__':
 	main()
