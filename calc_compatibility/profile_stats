@@ -1,52 +1,52 @@
 {
-    "bodytype": {
-        "thin": 0.06535947712418301, 
-        "ripped": 0.43790849673202614, 
-        "average": 0.22222222222222221, 
-        "no answer": 0.098039215686274508, 
-        "a little extra": 0.17647058823529413
-    }, 
-    "height": {
-        "not answered": 0.012903225806451613, 
-        "under 5'": 0.01935483870967742, 
-        "5'6 to 5'11": 0.59354838709677415, 
-        "5' to 5'5": 0.2129032258064516, 
-        "over 6'": 0.16129032258064516
-    }, 
-    "age": {
-        "18 to 25": 0.23684210526315788, 
-        "over 45": 0.125, 
-        "not answered": 0.0065789473684210523, 
-        "26 to 35": 0.46710526315789475, 
-        "36 to 45": 0.16447368421052633
-    }, 
     "ethnicity_2ormore": {
-        "hispanic / latin, other": 0.0065359477124183009, 
-        "pacific islander, hispanic / latin, white": 0.0065359477124183009, 
-        "middle eastern, hispanic / latin": 0.0065359477124183009, 
-        "hispanic / latin, white": 0.013071895424836602, 
-        "asian, native american, white": 0.0065359477124183009, 
-        "asian, middle eastern, native american, pacific islander, other": 0.0065359477124183009, 
-        "asian, pacific islander, white": 0.013071895424836602, 
-        "asian, white": 0.0065359477124183009, 
-        "black, white": 0.0065359477124183009, 
-        "pacific islander, white": 0.0065359477124183009, 
-        "black, hispanic / latin": 0.013071895424836602
-    }, 
+        "asian, white": 0.006535947712418301,
+        "asian, pacific islander, white": 0.013071895424836602,
+        "hispanic / latin, white": 0.013071895424836602,
+        "middle eastern, hispanic / latin": 0.006535947712418301,
+        "black, hispanic / latin": 0.013071895424836602,
+        "hispanic / latin, other": 0.006535947712418301,
+        "pacific islander, hispanic / latin, white": 0.006535947712418301,
+        "asian, middle eastern, native american, pacific islander, other": 0.006535947712418301,
+        "pacific islander, white": 0.006535947712418301,
+        "asian, native american, white": 0.006535947712418301,
+        "black, white": 0.006535947712418301
+    },
+    "age": {
+        "over 45": 0.12418300653594772,
+        "36 to 45": 0.16339869281045752,
+        "not answered": 0.006535947712418301,
+        "26 to 35": 0.46405228758169936,
+        "18 to 25": 0.23529411764705882
+    },
+    "height": {
+        "5'6 to 5'11": 0.6013071895424836,
+        "under 5'": 0.006535947712418301,
+        "5' to 5'5": 0.21568627450980393,
+        "over 6'": 0.16339869281045752,
+        "not answered": 0.013071895424836602
+    },
+    "bodytype": {
+        "ripped": 0.43790849673202614,
+        "a little extra": 0.17647058823529413,
+        "average": 0.2222222222222222,
+        "not answered": 0.09803921568627451,
+        "thin": 0.06535947712418301
+    },
     "ethnicity": {
-        "hispanic / latin": 0.032679738562091505, 
-        "Indicated 2 or more ethnicities": 0.091503267973856203, 
-        "white": 0.54248366013071891, 
-        "other": 0.019607843137254902, 
-        "black": 0.052287581699346407, 
-        "not answered": 0.10457516339869281, 
-        "asian": 0.15686274509803921
-    }, 
+        "white": 0.5424836601307189,
+        "asian": 0.1568627450980392,
+        "other": 0.0196078431372549,
+        "black": 0.05228758169934641,
+        "not answered": 0.10457516339869281,
+        "Indicated 2 or more ethnicities": 0.0915032679738562,
+        "hispanic / latin": 0.032679738562091505
+    },
     "education": {
-        "high school": 0.0065359477124183009, 
-        "no answer": 0.1111111111111111, 
-        "bachelors degree": 0.5163398692810458, 
-        "advanced degree": 0.28104575163398693, 
-        "some college": 0.06535947712418301
+        "high school": 0.026143790849673203,
+        "bachelors degree": 0.5163398692810458,
+        "not answered": 0.1111111111111111,
+        "some college": 0.06535947712418301,
+        "advanced degree": 0.28104575163398693
     }
 }

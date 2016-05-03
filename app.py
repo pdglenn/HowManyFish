@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 import random
+from calc_compatibility import calc_compatibility
 
 app = Flask(__name__)
 
@@ -28,9 +29,11 @@ def polar():
 def polar_sample():
     return render_template('polar_sample_1000.html')
 
+
 @app.route('/polar_sample_10000')
 def polar_sample_10000():
     return render_template('polar_sample_10000.html')
+
 
 @app.route('/slider')
 def slider():
@@ -43,13 +46,24 @@ def add_numbers():
     return jsonify(data=[random.random() * 100 for x in range(num)])
 
 
+@app.route('/_compatibility_calc')
+def compatibility_calc():
+    answers = request.args.get('answers')
+    importances = request.args.get('importances')
+
+    compatibility_json = calc_compatibility.calc_compatability(answers, importances)
+    return compatibility_json
+
+
 @app.route('/ajax_test')
 def ajax_test():
     return render_template('ajax_test.html')
 
+
 @app.route('/ajax_test2')
 def ajax_test2():
     return render_template('ajax_test2.html')
+
 
 if __name__ == '__main__':
     app.debug = True
