@@ -86,7 +86,7 @@ def get_aggregate_json(compatibility_threshold, people_for_aggregate):
 	'''
 	people_filtered = matches_above_compatibility_threshold(compatibility_threshold, people_for_aggregate)
 	profile_aggr_stats_json = profile_stats(people_filtered)
-	write_to_json(profile_aggr_stats_json)
+	# write_to_json(profile_aggr_stats_json)
 	return profile_aggr_stats_json
 
 
