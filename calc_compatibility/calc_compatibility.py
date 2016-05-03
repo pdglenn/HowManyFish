@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from data import *
+from calc_compatibility.data import *
 from json import dumps, load
 from math import sqrt
 import numpy as np
