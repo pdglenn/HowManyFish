@@ -1,0 +1,23 @@
+{
+    "education": {
+        "not answered": 0.25,
+        "high school": 0.25,
+        "bachelors degree": 0.5
+    },
+    "height": {
+        "5'6 to 5'11": 1.0
+    },
+    "ethnicity": {
+        "white": 0.75,
+        "asian": 0.25
+    },
+    "ethnicity_2ormore": {},
+    "age": {
+        "26 to 35": 0.75,
+        "18 to 25": 0.25
+    },
+    "bodytype": {
+        "ripped": 0.75,
+        "thin": 0.25
+    }
+}

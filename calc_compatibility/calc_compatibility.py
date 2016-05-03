@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from calc_compatibility.data import get_people
-from json import dumps, load
+from datetime import datetime
 from math import sqrt
 import numpy as np
 
@@ -115,13 +115,15 @@ def get_compatibility_json(user_answers, user_preferences, user_importances):
 	'''user_answers: list of 10 strings
 	user_preferences: list of 10 strings
 	user_importances: list of 10 numbers'''
+	t0 = datetime.now()
 	people_w_comp = match_compatibility(user_answers, user_preferences, user_importances)
 	people_w_comp_prof = normalize_people(people_w_comp)
 	people_for_json = people_w_comp_prof[['username', 'compatibility', 'ethnicity_norm', 'body_type_norm', 'height_norm', 'age_norm', 'education_norm']]
 	people_as_json = people_for_json.to_json(orient="records")
 	# write_to_json(people_as_json) #Uncomment for debugging
 	people_for_aggregate = people_w_comp_prof[['username', 'compatibility', 'ethnicity_norm', 'ethnicity', 'height_norm', 'education_norm', 'age_norm', 'body_type_norm']]
-
+	t1 = datetime.now()
+	print('runtime: ', t1-t0)
 	#Reutrn json and return people_w_comp_prof dataframe to be fed into aggregate
 	return people_as_json, people_for_aggregate
 

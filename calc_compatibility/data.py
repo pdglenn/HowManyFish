@@ -19,11 +19,13 @@
 import pandas as pd
 import urllib
 
+response = 'calc_compatibility/fake_data_clean.csv'
 url = 'http://people.ischool.berkeley.edu/~paul.glenn/i247s16/howmanyfishdata/fake_data_clean.csv'
 response = urllib.request.urlopen(url)
+response = 'calc_compatibility/fake_data_clean.csv'
 frame = pd.read_csv(response, low_memory=False)
 def get_people():
-    return frame
+    return frame[:1000]
 
 
 

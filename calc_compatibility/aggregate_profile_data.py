@@ -20,14 +20,20 @@ def matches_above_compatibility_threshold(compatibility_threshold, people):
 
 def ethnicity_stats(people_filtered):
 	category_counts = people_filtered.ethnicity_norm.value_counts(normalize = True) #Normalize used to get proportions (instead of frequencies)
-	category_counts = category_counts.to_dict()  #Convert to dictionary 
-	category_counts['not answered'] = category_counts.pop('-1') #Rename missing data
+	category_counts = category_counts.to_dict()  #Convert to dictionary
+	try:
+		category_counts['not answered'] = category_counts.pop('-1') #Rename missing data
+	except KeyError:
+		pass
 
 	category_counts_granular = people_filtered.ethnicity.value_counts(normalize = True)
 	category_counts_granular = category_counts_granular.to_dict()
 	to_remove = ['hispanic / latin', 'other', '-1', 'white', 'asian', 'black']
 	for ethn in to_remove:
-		category_counts_granular.pop(ethn)
+		try:
+			category_counts_granular.pop(ethn)
+		except KeyError:
+			continue
 	return category_counts, category_counts_granular
 
 def height_stats(people_filtered):
