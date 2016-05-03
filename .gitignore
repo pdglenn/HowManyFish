@@ -1,5 +1,6 @@
 *.xlsx
 *.pyc
 *.csv
+profile_stats
 /__pycache__
 
