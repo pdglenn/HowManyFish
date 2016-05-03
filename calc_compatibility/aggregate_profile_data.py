@@ -4,7 +4,7 @@
 #Return (in json) those aggregated stats
 
 from calc_compatibility import *
-from data import *
+from calc_compatibility.data import *
 from collections import defaultdict
 import json
 

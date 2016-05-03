@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 import random
-from calc_compatibility import calc_compatibility
+from calc_compatibility import calc_compatibility, aggregate_profile_data
 
 app = Flask(__name__)
 
@@ -51,7 +51,17 @@ def compatibility_calc():
     answers = request.args.get('answers')
     importances = request.args.get('importances')
 
-    compatibility_json = calc_compatibility.calc_compatability(answers, importances)
+    user_answers = ['Arrogance', 'Rarely/Never', 'Witty/tongue in cheek', 'Yes', 'Average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
+    user_preferences = ['Immaturity', 'Sometimes', 'Sarcastic', 'No', 'Below average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
+    user_importances = [250, 10, 1, 0, 10, 250, 10, 10, 1, 1]
+    compatibility_threshold = .9
+
+    compatibility_json, people_frame = calc_compatibility.get_compatibility_json(user_answers,
+                                                                                 user_preferences,
+                                                                                 user_importances)
+
+    aggregate_json = aggregate_profile_data.get_aggregate_json(compatibility_threshold, people_frame)
+
     return compatibility_json
 
 

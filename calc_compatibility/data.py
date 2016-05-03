@@ -16,9 +16,14 @@
 #Read in question answers, preferences, and importance level of potential matches from csv
 
 #Open csv
-import pandas as pd 
-people = pd.read_csv('fake_data_clean.csv', low_memory=False)
+import pandas as pd
+import urllib
 
+url = 'http://people.ischool.berkeley.edu/~paul.glenn/i247s16/howmanyfishdata/fake_data_clean.csv'
+response = urllib.request.urlopen(url)
+frame = pd.read_csv(response, low_memory=False)
+def get_people():
+    return frame
 
 
 

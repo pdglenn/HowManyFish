@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from data import *
+from calc_compatibility.data import get_people
 from json import dumps, load
 from math import sqrt
 import numpy as np
@@ -16,6 +16,7 @@ def match_compatibility(user_answers, user_preferences, user_importances):
 	# people['compatibility'] = np.vectorize(calc_compatibility)(people['person_answers'], people['person_preferences'], people['person_importances'])
 	vec = np.vectorize(calc_compatibility, excluded=['user_answers', 'user_preferences', 'user_importances'])
 	# people['compatibility'] = np.vectorize(calc_compatibility, excluded=['user_answers', 'user_preferences', 'user_importances'])(people['answers'], people['preferences'], people['importances'], user_answers, user_preferences, user_importances)
+	people = get_people()
 	people['compatibility'] = vec(person_answers = people['answers'], person_preferences = people['preferences'], person_importances = people['importances'], user_answers = user_answers, user_preferences=user_preferences, user_importances=user_importances)
 
 	return people
@@ -111,6 +112,9 @@ def write_to_json(people_compatibility):
 		outfile.write(people_compatibility)
 
 def get_compatibility_json(user_answers, user_preferences, user_importances):
+	'''user_answers: list of 10 strings
+	user_preferences: list of 10 strings
+	user_importances: list of 10 numbers'''
 	people_w_comp = match_compatibility(user_answers, user_preferences, user_importances)
 	people_w_comp_prof = normalize_people(people_w_comp)
 	people_for_json = people_w_comp_prof[['username', 'compatibility', 'ethnicity_norm', 'body_type_norm', 'height_norm', 'age_norm', 'education_norm']]
