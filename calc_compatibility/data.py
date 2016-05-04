@@ -25,7 +25,7 @@ response = urllib.request.urlopen(url)
 
 frame = pd.read_csv(response, low_memory=False)
 def get_people():
-    return frame[:3000]
+    return frame[:1000]
 
 
 
