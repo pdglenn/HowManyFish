@@ -6,9 +6,18 @@
     
     <!-- Create a link to the main.css stylesheet -->
     <link rel="stylesheet" href="static/_css/main.css" type="text/css" />
+    <link rel="stylesheet" href="static/circle.css" type="text/css" />
     <!-- Create a link to the bootstrap -->
     <link rel="stylesheet" href="static/bootstrap/css/bootstrap.css" /> 
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <style>
+      #scatter_plot{
+        min-height: 900px;
+      }
+    </style>
 </head>
 
 <body>
@@ -29,10 +38,6 @@
         </div>
         <div class="row">
           <div class="col-md-12" id="scatter_plot">
-            SCATTER PLOT <br>
-            <p align=center>
-            <img src="http://www.dogoilpress.com/data/wallpapers/26/FDS_568904.jpg" width=425 height=425>
-            </p>
           </div>
         </div>
       </div>
@@ -192,7 +197,8 @@
       </div>
     </div>
   </div>
-
+  <script src="static/script.js"></script>
+ <!-- <script src="static/sliders.js"></script>  -->
 </body>
 
 </html>

@@ -49,7 +49,9 @@ def add_numbers():
 @app.route('/_compatibility_calc')
 def compatibility_calc():
     answers = request.args.get('answers')
-    importances = request.args.get('importances')
+    importances = list(map(int, request.args.get('importances').split(',')))
+    print(importances)
+    print(type(importances))
 
     user_answers = ['Arrogance', 'Rarely/Never', 'Witty/tongue in cheek', 'Yes', 'Average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
     user_preferences = ['Immaturity', 'Sometimes', 'Sarcastic', 'No', 'Below average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
@@ -58,7 +60,7 @@ def compatibility_calc():
 
     compatibility_json, people_frame = calc_compatibility.get_compatibility_json(user_answers,
                                                                                  user_preferences,
-                                                                                 user_importances)
+                                                                                 importances)
 
     aggregate_json = aggregate_profile_data.get_aggregate_json(compatibility_threshold, people_frame)
 
