@@ -20,10 +20,12 @@ import pandas as pd
 import urllib
 
 response = 'calc_compatibility/fake_data_clean.csv'
-url = 'http://people.ischool.berkeley.edu/~paul.glenn/i247s16/howmanyfishdata/fake_data_clean.csv'
-response = urllib.request.urlopen(url)
-
-frame = pd.read_csv(response, low_memory=False)
+# url = 'http://people.ischool.berkeley.edu/~paul.glenn/i247s16/howmanyfishdata/fake_data_clean.csv'
+# response = urllib.request.urlopen(url)
+try:
+  frame = pd.read_csv(response, low_memory=False)
+except OSError:
+  frame = pd.read_csv('fake_data_clean.csv', low_memory=False)
 def get_people():
     return frame[:1000]
 
