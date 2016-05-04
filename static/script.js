@@ -11,7 +11,10 @@ var svg = d3.select("#scatter_plot").append("svg")
   .append("g")
   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-
+// http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
+var tooltip = d3.select("#scatter_plot").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
 
 var r = d3.scale.linear()
   .domain([0, 1])
@@ -34,20 +37,6 @@ var gr = svg.append("g")
 gr.append("circle")
   .attr("r", r);
 
-
-/*
-var ga = svg.append("g")
-  .attr("class", "a axis")
-  .selectAll("g")
-  .data(d3.range(0, 360, 30))
-  .enter().append("g")
-  .attr("transform", function(d) {
-    return "rotate(" + -d + ")";
-  });
-
-ga.append("line")
-  .attr("x2", radius);
-*/
 var color = d3.scale.category20();
 
 var line = d3.svg.line.radial()
@@ -58,13 +47,15 @@ var line = d3.svg.line.radial()
     return -d[0] + Math.PI / 2;
   });
   
-// function getData(){
-//   var data3 = [];
-//   for (var i = 0; i < 1000; i++){
-//     data3.push(Math.random() * 100);
-//   }
-//   return data3;
-// };
+function tooltipText(d){
+  return "Username: " + d.username + "<br/>" + 
+         "Ethnicity: " + d.ethnicity_norm + "<br/>" + 
+         "Body type: " + d.body_type_norm + "<br/>" +
+         "Height: " + d.height_norm + "<br/>" + 
+         "Age: " + d.age_norm + "<br/>" + 
+         "Education: " + d.education_norm
+};
+
 var globalData;
 function initialUpdate(num){
   console.log("updating");
@@ -112,13 +103,26 @@ function updateWithData(data){
       var coors = line([[i, 0]]).slice(1).slice(0, -1);
       return "translate(" + coors + ")"
     })
-    .transition()
-      .duration(1500)
-      .attr("r", 2) 
-      .attr("transform", function(d, i) {
-        var coors = line([[i, d.compatibility]]).slice(1).slice(0, -1);
-        return "translate(" + coors + ")"
-      })
+    .on("mouseover", function(d) {    
+    tooltip.transition()    
+        .duration(200)    
+        .style("opacity", .9);    
+    tooltip.html(tooltipText(d))  
+        .style("left", (d3.event.pageX) + "px")   
+        .style("top", (d3.event.pageY) - 210 + "px");  
+    })          
+  .on("mouseout", function(d) {   
+    tooltip.transition()    
+        .duration(500)    
+        .style("opacity", 0); 
+  })
+  .transition()
+    .duration(1500)
+    .attr("r", 2) 
+    .attr("transform", function(d, i) {
+      var coors = line([[i, d.compatibility]]).slice(1).slice(0, -1);
+      return "translate(" + coors + ")"
+    })
 
 
    circles.transition()
