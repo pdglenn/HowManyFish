@@ -77,6 +77,10 @@ def ajax_test():
     return render_template('ajax_test.html')
 
 
+@app.route('/andrea')
+def andrea():
+    return render_template('index_andreasbarcharts_v5.3.0140.html')
+
 @app.route('/ajax_test2')
 def ajax_test2():
     return render_template('ajax_test2.html')

@@ -9,7 +9,8 @@ var svg = d3.select("#scatter_plot").append("svg")
   .attr("height", height)
   .attr("id", "circle_svg")
   .append("g")
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr("class", "circle_g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 // http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 var tooltip = d3.select("#scatter_plot").append("div")
@@ -174,6 +175,3 @@ $(function() {
 
 
 initialUpdate(500);
-
-
-

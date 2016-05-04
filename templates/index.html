@@ -13,9 +13,14 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.7.0/d3-legend.min.js"></script>
     <style>
       #scatter_plot{
         min-height: 900px;
+      }
+      .container{
+        display: inline-block;
       }
     </style>
 </head>
@@ -135,7 +140,20 @@
           <div class="col-md-12" id="bars_title">
             <h4 id="barsHeader">Pool Statistics</h4>
           </div>
+        </div>
+        <div class="row">
           <div class="col-md-12" id="bars_container">
+            <div class="row">
+              <div id="age_chart" class="container"></div>
+              <div id="education_chart" class="container"></div>
+              <div id="ethnicity_chart" class="container"></div>
+              <div id="height_chart" class="container"></div>
+              <div id="bodytype_chart" class="container"></div>
+            </div>
+          </div>
+        </div>
+
+          <!--
             <div class="row">
               <div class="col-md-3" id="bar1">
                 BAR1
@@ -194,10 +212,12 @@
             </div>
           </div>
         </div>
+        -->
       </div>
     </div>
   </div>
   <script src="static/script.js"></script>
+  
  <!-- <script src="static/sliders.js"></script>  -->
 </body>
 
