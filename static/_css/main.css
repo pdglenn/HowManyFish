@@ -23,7 +23,6 @@ time, mark, audio, video {
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -55,18 +54,83 @@ table {
 /* 1. Set the page background to a color (ex. #eee for light gray) or to a background image.
 /* 2. Define the text font, size, color, boldness, and line height that will apply to the whole page. */
 body {
-    background: #eee;
-    color: #222;
+    background: #0A3C78;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
 }
 
 h1, h2, h3, h4, h5 {
     text-align: center;
+    vertical-align: center;
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
 /* STRUCTURE */
+
+.slide {
+/*    background-attachment: fixed;*/
+    height:auto;
+    position: relative;
+    vertical-align: center;
+}
+
+.slide h1 {
+    font-size: 3.8em;
+    margin: 0.1em 0;
+    line-height: 1em;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 8px #0A3C78;
+    text-align: center;
+}
+
+.slide h2 {
+    font-size: 2.0em;
+    color: #0A3C78;
+    text-align: left;
+}
+
+.slide p {
+    font-family: 'Lora';
+    font-size: 1.2em;
+    text-shadow: none;
+    color: #736F72;
+}
+
+.dark {
+    background-color: #0A3C78;
+/*    color: #ffffff;*/
+    width:100%;
+    padding:50px;
+}
+
+.light {
+    background-color: #FFFFFF;
+    padding: 10px;
+    width: 75%;
+    border: 1px solid #666;
+    left: 12.5%;
+}
+
+.image {
+    background-color: #0A3C78;
+    width: 75%;
+    left: 12.5%;
+}
+
+.image p {
+    font-family: 'Lora';
+    font-size: 1.2em;
+    text-shadow: none;
+    color: #FFFFFF;
+}
+
+.floatright
+{
+float: right;
+margin: 0 0 10px 10px;
+padding: 2px;
+}
 
 #container{
     background: #eee;
