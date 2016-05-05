@@ -61,7 +61,7 @@ def compatibility_calc():
     user_answers = ['Arrogance', 'Rarely/Never', 'Witty/tongue in cheek', 'Yes', 'Average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
     user_preferences = ['Immaturity', 'Sometimes', 'Sarcastic', 'No', 'Below average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
 
-    compatibility_threshold = 0
+    compatibility_threshold = .5
 
     compatibility_json, people_frame = calc_compatibility_loc.get_compatibility_json(user_answers,
                                                                                  user_preferences,

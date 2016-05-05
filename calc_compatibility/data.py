@@ -17,6 +17,7 @@
 
 #Open csv
 import pandas as pd
+from random import sample
 import urllib
 
 response = 'calc_compatibility/fake_data_clean.csv'
@@ -27,8 +28,8 @@ try:
 except OSError:
   frame = pd.read_csv('fake_data_clean.csv', low_memory=False)
 def get_people():
-    print('length:', len(frame))
-    return frame[:2000]
+    #return frame[10000:15000]
+    return frame.loc[sample(list(frame.index.values), 4000)]
 
 
 

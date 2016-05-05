@@ -312,19 +312,31 @@ function barsUpdateWithData(data){
       var legend = chartList[chart][1];
       var color = chartList[chart][2];
 
-      var rect = svg.selectAll('rect')
-        .data(stacked[chart])
-        .enter()
+      var rects = svg.selectAll('rect.valgroup').data(stacked[chart]);
+
+      rects.enter()
         .append('rect')
         .attr('x', function(d) { return x(d.x) })
         .attr('y', function(d) { return -y(d.y0) - y(d.y) })
         .attr('height', function(d) { return y(d.y) })
-        .attr('width', -x.rangeBand())
+        .attr('width', w)
         .attr('class', 'valgroup')
         .style('fill', function(d, i){ return color(i) })
         .style('stroke', function(d, i) {
           return d3.rgb(color(i)).darker();
         });
+        // .transition()
+        // .duration(1500)
+        // .attr('height', function(d) { return y(d.y) });
+
+      rects.transition()
+        .duration(1500)
+        .attr('x', function(d) { return x(d.x) })
+        .attr('y', function(d) { return -y(d.y0) - y(d.y) })
+        .attr('height', function(d) { return y(d.y) })
+        .attr('width', w);
+
+
     }
     console.log(".legend_"+chart);
     svg.select(".legend_"+chart).call(legend);
@@ -348,7 +360,7 @@ function barsUpdateWithData(data){
 }
 
 
-function stackData(data, category) {
+function stackData(data) {
   var stacked = {};
   for (var cat in responses) {
     if (responses.hasOwnProperty(cat)) {
