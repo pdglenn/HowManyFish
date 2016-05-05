@@ -27,7 +27,8 @@ try:
 except OSError:
   frame = pd.read_csv('fake_data_clean.csv', low_memory=False)
 def get_people():
-    return frame[:1000]
+    print('length:', len(frame))
+    return frame[:2000]
 
 
 

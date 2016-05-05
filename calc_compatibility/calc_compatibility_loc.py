@@ -65,7 +65,10 @@ def normalize_people(people):
 
 
 def height_map(row):
-	h = int(row['height'])
+	try:
+		h = int(row['height'])
+	except ValueError:
+		return "not answered"
 	if h < 60:
 		return "under 5'"
 	elif 60 <= h < 66:
@@ -98,7 +101,10 @@ def edu_map(row):
 		return 'not answered'
 
 def age_map(row):
-	age = int(row['age'])
+	try:
+		age = int(row['age'])
+	except ValueError:
+		return 'not answered'
 	if 18 <= age <= 25:
 		return '18 to 25'
 	elif 25 < age <= 35:
