@@ -15,6 +15,41 @@ var svg = d3.select("#scatter_plot").append("svg")
     .attr("class", "circle_g")
     .attr("transform", "translate(" + circleWidth / 2 + "," + circleHeight / 2 + ")");
 
+// http://stackoverflow.com/questions/19202450/adding-an-image-within-a-circle-object-in-d3-javascript
+var mdef = d3.select("body").append("svg")
+  .attr("id", "pint")
+  .attr("width", 0)
+  .attr("height", 0)
+    .append("defs")
+    .attr("id", "mdef")
+
+mdef.append("pattern")
+  .attr("id", "emily")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("height", 50)
+  .attr("width", 50)
+    .append("image")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", 50)
+    .attr("height", 50)
+    .attr("xlink:href", "http://www.ischool.berkeley.edu/files/imagecache/profile-thumbnail/headshot2.jpeg");
+
+mdef.append("pattern")
+  .attr("id", "paul")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("height", 50)
+  .attr("width", 50)
+  .append("image")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", 50)
+  .attr("height", 50)
+  .attr("xlink:href", "http://www.ischool.berkeley.edu/files/imagecache/profile-pic/linkedin_0.jpg");
+
+
 // http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 var tooltip = d3.select("#scatter_plot").append("div")
   .attr("class", "tooltip")
@@ -41,11 +76,11 @@ var drag = d3.behavior.drag()
 var gr = svg.append("g")
   .attr("class", "r axis")
   .selectAll("g")
-  .data(r.ticks(1))
+  .data([r(0)])
   .enter().append("g");
 
 gr.append("circle")
-  .attr("r", r)
+  .attr("r", r(0))
   .attr("stroke-width", 2)
 
 var dr = svg.append("g")
@@ -59,6 +94,27 @@ dr.append("circle")
   .attr("r", r(.5))
   .attr("stroke-width", 5)
   .call(drag);
+
+var ir = svg.append("g")
+  .attr("class", "r axis")
+  .selectAll("g")
+  .data([r(1)])
+  .enter().append("g");
+
+ir.append("circle")
+  .attr("r", r(1))
+  .attr("stroke-width", 2)
+  .style("fill", "url(#emily)")
+
+  .on("mouseover", function(){
+    d3.select(this)
+      .style("fill", "url(#paul)");
+  })
+  .on("mouseout", function(){
+    d3.select(this)
+      .style("fill", "url(#emily)");
+  });
+
 
 // http://bl.ocks.org/mbostock/1557377
 // http://stackoverflow.com/questions/18571563/d3s-mouse-coordinates-relative-to-parent-element
