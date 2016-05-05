@@ -15,41 +15,6 @@ var svg = d3.select("#scatter_plot").append("svg")
     .attr("class", "circle_g")
     .attr("transform", "translate(" + circleWidth / 2 + "," + circleHeight / 2 + ")");
 
-// http://stackoverflow.com/questions/19202450/adding-an-image-within-a-circle-object-in-d3-javascript
-var mdef = d3.select("body").append("svg")
-  .attr("id", "pint")
-  .attr("width", 0)
-  .attr("height", 0)
-    .append("defs")
-    .attr("id", "mdef")
-
-mdef.append("pattern")
-  .attr("id", "emily")
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("height", 50)
-  .attr("width", 50)
-    .append("image")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", 50)
-    .attr("height", 50)
-    .attr("xlink:href", "http://www.ischool.berkeley.edu/files/imagecache/profile-thumbnail/headshot2.jpeg");
-
-mdef.append("pattern")
-  .attr("id", "paul")
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("height", 50)
-  .attr("width", 50)
-  .append("image")
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("width", 50)
-  .attr("height", 50)
-  .attr("xlink:href", "http://www.ischool.berkeley.edu/files/imagecache/profile-pic/linkedin_0.jpg");
-
-
 // http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 var tooltip = d3.select("#scatter_plot").append("div")
   .attr("class", "tooltip")
@@ -67,6 +32,40 @@ var line = d3.svg.line.radial()
     return -d[0] + Math.PI / 2;
   });
 
+// http://stackoverflow.com/questions/19202450/adding-an-image-within-a-circle-object-in-d3-javascript
+var mdef = d3.select("body").append("svg")
+  .attr("id", "pint")
+  .attr("width", 0)
+  .attr("height", 0)
+  .append("defs")
+  .attr("id", "mdef");
+
+mdef.append("pattern")
+  .attr("id", "emily")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("height", radius*.04)
+  .attr("width", radius*.04)
+  .append("image")
+  .attr("x", -40)
+  .attr("y", -20)
+  .attr("width", 2*radius*.14)
+  .attr("height", 2*radius*.14)
+  .attr("xlink:href", "/static/emily.jpeg");
+
+mdef.append("pattern")
+  .attr("id", "paul")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("height", 2*radius*.07)
+  .attr("width", 2*radius*.07)
+  .append("image")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", 2*radius*.07)
+  .attr("height", 2*radius*.07)
+  .attr("xlink:href", "http://www.ischool.berkeley.edu/files/imagecache/profile-pic/linkedin_0.jpg");
+
 
 var drag = d3.behavior.drag()
   .origin(function(d) { return d; })
@@ -81,7 +80,7 @@ var gr = svg.append("g")
 
 gr.append("circle")
   .attr("r", r(0))
-  .attr("stroke-width", 2)
+  .attr("stroke-width", 2);
 
 var dr = svg.append("g")
   .attr("class", "r axis")
@@ -93,6 +92,7 @@ dr.append("circle")
   .attr('id', 'threshold')
   .attr("r", r(.5))
   .attr("stroke-width", 5)
+  .attr("cursor", "move")
   .call(drag);
 
 var ir = svg.append("g")
@@ -133,6 +133,36 @@ function dragend(d){
 }
 
 var color = d3.scale.category20();
+
+function pickColor(d, id) {
+  var colorList = {'age': z_green,
+    'education': z_blue,
+    'ethnicity': z_purple,
+    'height': z_pink,
+    'bodytype': z_red};
+
+  console.log('color pick category:');
+  console.log(id);
+  category = id.split('#')[1].split('_')[0]
+  choices = responses[category];
+  index = $.inArray(d[category + '_norm'], choices);
+  console.log('category' + category);
+  console.log('index ' + index);
+
+  if (index == -1) {
+    console.log('in if');
+    return '#000000'
+  }
+  console.log(colorList[category+'_norm']);
+  colorScale = colorList[category];
+  return colorScale(index);
+}
+
+function updateColors(category) {
+  var circles = svg.selectAll("circle.point").data(gData[0]);
+  circles.transition()
+    .attr("fill", function(d){ return pickColor(d, category)});
+}
 
 function tooltipText(d){
   return "Username: " + d.username + "<br/>" + 
@@ -255,8 +285,7 @@ $(function() {
 
 
 //----------------------------
-// var w = $("#bars_container").width() / 5,
-//   h = $("#bars_container").height();
+
 var w = 160,
 h = 500;
 var legend_h = 250;
@@ -316,7 +345,7 @@ function initCanvas(id){
     .append("svg:g")
     .attr("transform", "translate(10,460)")
     .on("click", function() {
-      console.log(id);
+      updateColors(id);
     });
 }
 
@@ -393,6 +422,8 @@ function initialUpdateBars(){
     .attr("transform", "translate(0, 10)");
 }
 var gStack;
+var gChartList;
+
 function barsUpdateWithData(data){
   var stacked = stackData(data);
   gStack = stacked;
@@ -401,6 +432,7 @@ function barsUpdateWithData(data){
     'ethnicity': [svg_ethnicity, legend_ethnicity, z_purple],
     'height': [svg_height, legend_height, z_pink],
     'bodytype': [svg_bodytype, legend_bodytype, z_red]};
+  gChartList = chartList;
 
   for (var chart in chartList){
     if (chartList.hasOwnProperty(chart)){

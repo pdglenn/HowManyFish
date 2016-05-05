@@ -133,11 +133,11 @@ padding: 2px;
 }
 
 #container{
-    background: #eee;
+    background: #ffffff;
 }
 
 div[class^="col-md"] {
-    background: #bce2ff;
+    background: #ffffff;
     border-style: dashed;
     border-width: 1px;
     border-color: #eee;
