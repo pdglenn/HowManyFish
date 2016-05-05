@@ -115,6 +115,12 @@ ir.append("circle")
       .style("fill", "url(#emily)");
   });
 
+var compat_text = d3.select("#circle_svg").append("text")
+  .attr("id", "compat_text")
+  .attr("x", 20)
+  .attr("y", 20)
+  .style("fill", "white")
+  .text("Compatibility Threshold: 50%");
 
 // http://bl.ocks.org/mbostock/1557377
 // http://stackoverflow.com/questions/18571563/d3s-mouse-coordinates-relative-to-parent-element
@@ -125,7 +131,8 @@ function dragmove(d){
   d3.select(this)
     .attr("r", radius);
   console.log(radius);
-  //console.log(r.invert($('#threshold').attr("r")));
+  threshold = Math.round(r.invert($('#threshold').attr("r")) * 100);
+  compat_text.text("Compatibility Threshold: " + threshold + "%");
 }
 
 function dragend(d){
@@ -151,7 +158,7 @@ function pickColor(d, id) {
 
   if (index == -1) {
     console.log('in if');
-    return '#000000'
+    return '#FFFFFF'
   }
   console.log(colorList[category+'_norm']);
   colorScale = colorList[category];
@@ -240,7 +247,8 @@ function circleUpdateWithData(data){
   })
   .transition()
     .duration(1500)
-    .attr("r", 2) 
+    .attr("r", 3.5)
+    .style("fill-opacity", 0)
     .attr("transform", function(d, i) {
       var coors = line([[i, d.compatibility]]).slice(1).slice(0, -1);
       return "translate(" + coors + ")"
@@ -253,7 +261,8 @@ function circleUpdateWithData(data){
       var coors = line([[i, d.compatibility]]).slice(1).slice(0, -1);
       return "translate(" + coors + ")"
     })
-    .attr("r", 2);
+    .attr("r", 3.5)
+     .style("opacity", 1);
 
     circles.exit()
       .transition()
@@ -290,6 +299,8 @@ var w = 160,
 h = 500;
 var legend_h = 250;
 
+w = a=$('.col-md-15').width()-10;
+
 var barContainer = d3.select('#bars_container');
 var tip;
 var svg_age, svg_education, svg_ethnicity, svg_height, svg_bodytype;
@@ -300,25 +311,50 @@ var barOuterPad = 0, barPad = .5;
 var x = d3.scale.ordinal().rangeRoundBands([0, w-50], barPad, barOuterPad);
 var y = d3.scale.linear().range([0, h-75]);
 
+// Age
 var z_green = d3.scale.linear()
   .domain([0, 4])
   .range(["#ECEBE4", "#20BF55"]);
 
+// var z_green = d3.scale.ordinal()
+//   .domain([0, 4])
+//   .range(['#FFFFFF', '#20BF55','#EF946C','#D30C7B','#822E81']);
+
+// Education
 var z_blue = d3.scale.linear()
   .domain([0, 4])
   .range(["#ECEBE4", "#246EB9"]);
+// var z_blue = d3.scale.ordinal()
+//   .domain([0, 4])
+//   .range(['#ffffff', '#DBFE87','#FF6B35','#D2FF28','#9e9ac8']);
 
+// Ethnicity
 var z_purple = d3.scale.linear()
   .domain([0, 6])
   .range(["#ECEBE4", "#D30C7B"]);
+//
+// var z_purple = d3.scale.ordinal()
+//   .domain([0, 9])
+//   .range( ['#FFFFFF', '#0E84A1', '#FF6700 ', '#0496FF', '#A8981B',
+//     '#EAC435', '#1CC000 ', '#FE7C0D', '#5FC2F1', '#7CEA9C']);
 
+// Height
 var z_pink = d3.scale.linear()
   .domain([0, 4])
-  .range(["#ECEBE4", "#0A3C78"]);
+  .range(["#ECEBE4", "#FB8B24"]);
 
+// var z_pink = d3.scale.ordinal()
+//   .domain([0, 4])
+//   .range(['#ffffff', '#A682FF','#61E294','#E3B505','#55C1FF']);
+
+// Body Type
 var z_red = d3.scale.linear()
   .domain([0, 4])
   .range(["#ECEBE4", "#1B998B"]);
+
+// var z_red = d3.scale.ordinal()
+//   .domain([0, 4])
+//   .range(['#ffffff', '#20BF55','#FFE74C','#D30C7B','#FFB86F']);
 
 var responses = {
   'age': ['not answered', 'over 45', '36 to 45',
@@ -365,7 +401,7 @@ function initLegend(responses, colors){
 
 function appendText(svg, text, color){
   svg.append("text")
-    .attr("x", 50)
+    .attr("x", '40%')
     .attr("y", -440)
     .attr("text-anchor", "middle")
     .style("font-size", "20px")
@@ -408,7 +444,7 @@ function initialUpdateBars(){
   svg_height = initCanvas('#height_chart');
   svg_height.call(tip);
   legend_height = initLegend(responses.height, z_pink);
-  appendText(svg_height, "Height", "#0A3C78");
+  appendText(svg_height, "Height", "#FB8B24");
   svg_height.append("g")
     .attr("class", "legend_height")
     .attr("transform", "translate(0, 10)");
