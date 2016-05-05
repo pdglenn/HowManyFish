@@ -17,10 +17,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.7.0/d3-legend.min.js"></script>
     <style>
       #scatter_plot{
-        min-height: 900px;
+        min-height: 945px;
       }
       .container{
-        display: inline-block;
+        float: left;
       }
     </style>
 </head>
@@ -142,14 +142,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12" id="bars_container">
-            <div class="row">
-              <div id="age_chart" class="container"></div>
-              <div id="education_chart" class="container"></div>
-              <div id="ethnicity_chart" class="container"></div>
-              <div id="height_chart" class="container"></div>
-              <div id="bodytype_chart" class="container"></div>
-            </div>
+          <div id="bars_container">
+
+              <div id="age_chart" class="col-md-15"></div>
+              <div id="education_chart" class="col-md-15"></div>
+              <div id="ethnicity_chart" class="col-md-15"></div>
+              <div id="height_chart" class="col-md-15"></div>
+              <div id="bodytype_chart" class="col-md-15"></div>
+
           </div>
         </div>
 

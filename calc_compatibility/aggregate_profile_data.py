@@ -28,7 +28,7 @@ def ethnicity_stats(people_filtered):
 
 	category_counts_granular = people_filtered.ethnicity.value_counts(normalize = True)
 	category_counts_granular = category_counts_granular.to_dict()
-	to_remove = ['hispanic / latin', 'other', '-1', 'white', 'asian', 'black']
+	to_remove = ['hispanic / latin', 'other', '-1', 'white', 'asian', 'black', 'pacific islander', 'native american', 'indian']
 	for ethn in to_remove:
 		try:
 			category_counts_granular.pop(ethn)

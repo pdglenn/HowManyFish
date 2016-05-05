@@ -163,7 +163,7 @@ $(function() {
 //   h = $("#bars_container").height();
 var w = 160,
 h = 500;
-var legend_h = 150;
+var legend_h = 250;
 
 var barContainer = d3.select('#bars_container');
 var tip;
@@ -196,15 +196,16 @@ var z_red = d3.scale.linear()
   .range(["#ECEBE4", "#1B998B"]);
 
 var responses = {
-  'age': ['no response', 'over 45', '36 to 45',
+  'age': ['not answered', 'over 45', '36 to 45',
     '26 to 35', '18 to 25'],
-  'education': ['no response', 'adv. degree', 'bach. degree',
+  'education': ['not answered', 'advanced degree', 'bachelors degree',
     'some college', 'high school'],
-  'ethnicity': ['no response', 'other', '2+ ethnicities',
-    'white', 'hispanic/latin', 'black', 'asian'],
-  'height': ['no response', "over 6'", "5'6 to 5'11",
+  'ethnicity': ['not answered', 'other', 'Indicated 2 or more ethnicities',
+    'white', 'hispanic / latin', 'black', 'asian', 'pacific islander',
+    'native american', 'indian'],
+  'height': ['not answered', "over 6'", "5'6 to 5'11",
     "5' to 5'5", "under 5'"],
-  'bodytype': ['no response', 'a little extra', 'ripped',
+  'bodytype': ['not answered', 'a little extra', 'ripped',
     'average', 'thin']
 };
 
@@ -237,6 +238,16 @@ function initLegend(responses, colors){
   // .title('Age');
 }
 
+function appendText(svg, text, color){
+  svg.append("text")
+    .attr("x", 50)
+    .attr("y", -440)
+    .attr("text-anchor", "middle")
+    .style("font-size", "20px")
+    .style("font-weight", "bold")
+    .style("fill", color)
+    .text(text);
+}
 function initialUpdateBars(){
   tip = d3.tip()
     .attr('class', 'd3-tip')
@@ -248,40 +259,91 @@ function initialUpdateBars(){
   svg_age = initCanvas('#age_chart');
   svg_age.call(tip);
   legend_age = initLegend(responses.age, z_green);
+  appendText(svg_age, "Age", "#20BF55");
+  svg_age.append("g")
+    .attr("class", "legend_age")
+    .attr("transform", "translate(0, 10)");
 
   svg_education = initCanvas('#education_chart');
   svg_education.call(tip);
   legend_education = initLegend(responses.education, z_blue);
+  appendText(svg_education, "Education", "#246EB9");
+  svg_education.append("g")
+    .attr("class", "legend_education")
+    .attr("transform", "translate(0, 10)");
 
   svg_ethnicity = initCanvas('#ethnicity_chart');
   svg_ethnicity.call(tip);
   legend_ethnicity = initLegend(responses.ethnicity, z_purple);
+  appendText(svg_ethnicity, "Ethnicity", "#D30C7B");
+  svg_ethnicity.append("g")
+    .attr("class", "legend_ethnicity")
+    .attr("transform", "translate(0, 10)");
 
   svg_height = initCanvas('#height_chart');
   svg_height.call(tip);
   legend_height = initLegend(responses.height, z_pink);
+  appendText(svg_height, "Height", "#0A3C78");
+  svg_height.append("g")
+    .attr("class", "legend_height")
+    .attr("transform", "translate(0, 10)");
 
   svg_bodytype = initCanvas('#bodytype_chart');
   svg_bodytype.call(tip);
   legend_bodytype = initLegend(responses.bodytype, z_red);
+  appendText(svg_bodytype, "Body Type", "#1B998B");
+  svg_bodytype.append("g")
+    .attr("class", "legend_bodytype")
+    .attr("transform", "translate(0, 10)");
 }
-
+var gStack;
 function barsUpdateWithData(data){
   var stacked = stackData(data);
+  gStack = stacked;
+  var chartList = {'age': [svg_age, legend_age, z_green],
+    'education': [svg_education, legend_education, z_blue],
+    'ethnicity': [svg_ethnicity, legend_ethnicity, z_purple],
+    'height': [svg_height, legend_height, z_pink],
+    'bodytype': [svg_bodytype, legend_bodytype, z_red]};
 
-  var age_rect = svg_age.selectAll('rect')
-    .data(stacked.age)
-    .enter()
-    .append('rect')
-    .attr('x', function(d) { return x(d.x) })
-    .attr('y', function(d) { return -y(d.y0) - y(d.y) })
-    .attr('height', function(d) { return y(d.y) })
-    .attr('width', -x.rangeBand())
-    .attr('class', 'valgroup')
-    .style('fill', function(d, i){ return z_green(i) })
-    .style('stroke', function(d, i) {
-      return d3.rgb(z_green(i)).darker();
-    });
+  for (var chart in chartList){
+    if (chartList.hasOwnProperty(chart)){
+      var svg = chartList[chart][0];
+      var legend = chartList[chart][1];
+      var color = chartList[chart][2];
+
+      var rect = svg.selectAll('rect')
+        .data(stacked[chart])
+        .enter()
+        .append('rect')
+        .attr('x', function(d) { return x(d.x) })
+        .attr('y', function(d) { return -y(d.y0) - y(d.y) })
+        .attr('height', function(d) { return y(d.y) })
+        .attr('width', -x.rangeBand())
+        .attr('class', 'valgroup')
+        .style('fill', function(d, i){ return color(i) })
+        .style('stroke', function(d, i) {
+          return d3.rgb(color(i)).darker();
+        });
+    }
+    console.log(".legend_"+chart);
+    svg.select(".legend_"+chart).call(legend);
+  }
+
+
+  // var age_rect = svg_age.selectAll('rect')
+  //   .data(stacked.age)
+  //   .enter()
+  //   .append('rect')
+  //   .attr('x', function(d) { return x(d.x) })
+  //   .attr('y', function(d) { return -y(d.y0) - y(d.y) })
+  //   .attr('height', function(d) { return y(d.y) })
+  //   .attr('width', -x.rangeBand())
+  //   .attr('class', 'valgroup')
+  //   .style('fill', function(d, i){ return z_green(i) })
+  //   .style('stroke', function(d, i) {
+  //     return d3.rgb(z_green(i)).darker();
+  //   });
 
 }
 
