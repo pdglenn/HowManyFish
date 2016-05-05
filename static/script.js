@@ -2,6 +2,9 @@
 var circleWidth = $("#scatter_plot").width(),
   circleHeight = $("#scatter_plot").height();
 
+var cX = circleWidth / 2;
+var cY = circleHeight / 2;
+
 radius = Math.min(circleWidth, circleHeight) / 2 - 10;
 
 var svg = d3.select("#scatter_plot").append("svg")
@@ -29,14 +32,49 @@ var line = d3.svg.line.radial()
     return -d[0] + Math.PI / 2;
   });
 
+
+var drag = d3.behavior.drag()
+  .origin(function(d) { return d; })
+  .on("drag", dragmove)
+  .on("dragend", dragend);
+
 var gr = svg.append("g")
   .attr("class", "r axis")
   .selectAll("g")
-  .data(r.ticks(3))
+  .data(r.ticks(1))
   .enter().append("g");
 
 gr.append("circle")
-  .attr("r", r);
+  .attr("r", r)
+  .attr("stroke-width", 2)
+
+var dr = svg.append("g")
+  .attr("class", "r axis")
+  .selectAll("g")
+  .data([r(.5)])
+  .enter().append("g");
+
+dr.append("circle")
+  .attr('id', 'threshold')
+  .attr("r", r(.5))
+  .attr("stroke-width", 5)
+  .call(drag);
+
+// http://bl.ocks.org/mbostock/1557377
+// http://stackoverflow.com/questions/18571563/d3s-mouse-coordinates-relative-to-parent-element
+function dragmove(d){
+  m = d3.mouse(d3.select('#scatter_plot').node());
+  var radius = Math.min(r(0), Math.max(Math.sqrt(Math.pow(cX - m[0], 2) + Math.pow(cY - m[1], 2)), r(1)));
+
+  d3.select(this)
+    .attr("r", radius);
+  console.log(radius);
+  //console.log(r.invert($('#threshold').attr("r")));
+}
+
+function dragend(d){
+  circleUpdate();
+}
 
 var color = d3.scale.category20();
 
@@ -51,22 +89,22 @@ function tooltipText(d){
 var gData;
 
 function initialUpdate(){
-  console.log("updating");
+  console.log("initial updating");
   trueValues = {0: 0, 10: 1, 50: 10, 100: 250};
   importances = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-  console.log(importances);
   //d3.json($SCRIPT_ROOT + '/_add_numbers?num='+num, function(error, data) {
   d3.json("" + '/_compatibility_calc?importances='+importances, function(error, data) {
     gData = data;
     circleUpdateWithData(data[0]);
     initialUpdateBars();
     barsUpdateWithData(data[1][0]);
+    console.log('initial update done')
   });
 }
 
 function circleUpdate(){
-  console.log("updating");
+  console.log("circles updating");
   var trueValues = {1: 0, 2: 1, 3: 10, 4: 250};
   var importances = [];
 
@@ -74,19 +112,21 @@ function circleUpdate(){
     importances.push(trueValues[$("#slider"+i).slider("option", "value")])
   }
   console.log(importances);
+  var compatibility = r.invert($('#threshold').attr("r"));
 
-  d3.json("" + '/_compatibility_calc?importances='+importances, function(error, data) {
+  d3.json("" + '/_compatibility_calc?compatibility='+compatibility+'&importances='+importances, function(error, data) {
     gData = data;
     circleUpdateWithData(data[0]);
+    console.log('circles update done')
     barsUpdateWithData(data[1][0]);
+    console.log('bars update done')
+
   });
 }
 
 function circleUpdateWithData(data){
-  console.log('updating circles');
-  //console.log(data);
+
   var circles = svg.selectAll("circle.point").data(data);
-  console.log(data.length);
 
   circles.enter()
     .append("circle")
@@ -367,8 +407,6 @@ function stackData(data) {
       var f = [];
       var y0 = 0;
       for (var i in responses[cat]) {
-        console.log(data[cat]);
-        console.log(responses[cat][i]);
         var height = data[cat][responses[cat][i]];
         if (height == null){
           height = 0;

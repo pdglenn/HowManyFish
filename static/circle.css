@@ -11,7 +11,7 @@
 .axis circle {
   fill: none;
   stroke: steelblue;
-  stroke-dasharray: 4;
+
 }
 
 .axis:last-of-type circle {

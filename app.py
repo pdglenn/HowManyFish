@@ -54,14 +54,14 @@ def compatibility_calc():
         importances = list(map(int, request.args.get('importances').split(',')))
     except:
         importances = [250, 10, 1, 0, 10, 250, 10, 10, 1, 1]
-
+    compatibility_threshold = float(request.args.get('compatibility', .5))
     print(importances)
     print(type(importances))
 
     user_answers = ['Arrogance', 'Rarely/Never', 'Witty/tongue in cheek', 'Yes', 'Average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
     user_preferences = ['Immaturity', 'Sometimes', 'Sarcastic', 'No', 'Below average', 'Yes', 'Centrist', "I'm open but I don't go too crazy", 'Way more than average', 'Weird']
 
-    compatibility_threshold = .5
+
 
     compatibility_json, people_frame = calc_compatibility_loc.get_compatibility_json(user_answers,
                                                                                  user_preferences,

@@ -28,8 +28,8 @@ try:
 except OSError:
   frame = pd.read_csv('fake_data_clean.csv', low_memory=False)
 def get_people():
-    #return frame[10000:15000]
-    return frame.loc[sample(list(frame.index.values), 4000)]
+    return frame[10000:15000]
+    #return frame.loc[sample(list(frame.index.values), 5)]
 
 
 
