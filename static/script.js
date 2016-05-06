@@ -20,6 +20,11 @@ var tooltip = d3.select("#scatter_plot").append("div")
   .attr("class", "tooltip")
   .style("opacity", 0);
 
+var bartip = d3.select("#bars_container").append("div")
+  .attr("class", "bartip")
+  .style("opacity", 0);
+
+
 var r = d3.scale.linear()
   .domain([0, 1])
   .range([radius, radius*.07]);
@@ -130,7 +135,6 @@ function dragmove(d){
 
   d3.select(this)
     .attr("r", radius);
-  console.log(radius);
   threshold = Math.round(r.invert($('#threshold').attr("r")) * 100);
   compat_text.text("Compatibility Threshold: " + threshold + "%");
 }
@@ -148,19 +152,15 @@ function pickColor(d, id) {
     'height': z_pink,
     'bodytype': z_red};
 
-  console.log('color pick category:');
-  console.log(id);
   category = id.split('#')[1].split('_')[0]
   choices = responses[category];
   index = $.inArray(d[category + '_norm'], choices);
-  console.log('category' + category);
-  console.log('index ' + index);
 
   if (index == -1) {
-    console.log('in if');
+
     return '#FFFFFF'
   }
-  console.log(colorList[category+'_norm']);
+
   colorScale = colorList[category];
   return colorScale(index);
 }
@@ -179,10 +179,21 @@ function tooltipText(d){
          "Age: " + d.age_norm + "<br/>" + 
          "Education: " + d.education_norm
 }
+
+//http://stackoverflow.com/questions/4878756/javascript-how-to-capitalize-first-letter-of-each-word-like-a-2-word-city
+function toTitleCase(str)
+{
+  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+
+function bartipText(d){
+  return toTitleCase(d.category) + "<br/>" + Math.round(d.y*100)+"%";
+}
+
 var gData;
 
 function initialUpdate(){
-  console.log("initial updating");
   trueValues = {0: 0, 10: 1, 50: 10, 100: 250};
   importances = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
@@ -192,28 +203,22 @@ function initialUpdate(){
     circleUpdateWithData(data[0]);
     initialUpdateBars();
     barsUpdateWithData(data[1][0]);
-    console.log('initial update done')
   });
 }
 
 function circleUpdate(){
-  console.log("circles updating");
   var trueValues = {1: 0, 2: 1, 3: 10, 4: 250};
   var importances = [];
 
   for (var i = 1; i < 11; i++){
     importances.push(trueValues[$("#slider"+i).slider("option", "value")])
   }
-  console.log(importances);
   var compatibility = r.invert($('#threshold').attr("r"));
 
   d3.json("" + '/_compatibility_calc?compatibility='+compatibility+'&importances='+importances, function(error, data) {
     gData = data;
     circleUpdateWithData(data[0]);
-    console.log('circles update done')
     barsUpdateWithData(data[1][0]);
-    console.log('bars update done')
-
   });
 }
 
@@ -488,7 +493,20 @@ function barsUpdateWithData(data){
         .style('fill', function(d, i){ return color(i) })
         .style('stroke', function(d, i) {
           return d3.rgb(color(i)).darker();
-        });
+        })
+        .on("mouseover", function(d) {
+            bartip.transition()
+              .duration(200)
+              .style("opacity", .9);
+            bartip.html(bartipText(d))
+              .style("left", (d3.event.pageX)- $("#circle_svg").width() - 165 + "px")
+              .style("top", (d3.event.pageY) -150+ "px");
+          })
+            .on("mouseout", function(d) {
+              bartip.transition()
+                .duration(500)
+                .style("opacity", 0);
+            });
         // .transition()
         // .duration(1500)
         // .attr('height', function(d) { return y(d.y) });
@@ -502,25 +520,8 @@ function barsUpdateWithData(data){
 
 
     }
-    console.log(".legend_"+chart);
     svg.select(".legend_"+chart).call(legend);
   }
-
-
-  // var age_rect = svg_age.selectAll('rect')
-  //   .data(stacked.age)
-  //   .enter()
-  //   .append('rect')
-  //   .attr('x', function(d) { return x(d.x) })
-  //   .attr('y', function(d) { return -y(d.y0) - y(d.y) })
-  //   .attr('height', function(d) { return y(d.y) })
-  //   .attr('width', -x.rangeBand())
-  //   .attr('class', 'valgroup')
-  //   .style('fill', function(d, i){ return z_green(i) })
-  //   .style('stroke', function(d, i) {
-  //     return d3.rgb(z_green(i)).darker();
-  //   });
-
 }
 
 
