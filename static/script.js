@@ -437,15 +437,15 @@ function appendText(svg, text, color){
     .text(text);
 }
 function initialUpdateBars(){
-  tip = d3.tip()
-    .attr('class', 'd3-tip')
-    .offset([40, 85])
-    .html(function(d, i) {
-        return d.category + ": <span style='color:white'>" + Math.round(d.y*100).toFixed(0) + "%";
-    });
+//   tip = d3.tip()
+//     .attr('class', 'd3-tip')
+//     .offset([40, 85])
+//     .html(function(d, i) {
+//         return d.category + ": <span style='color:white'>" + Math.round(d.y*100).toFixed(0) + "%";
+//     });
 
   svg_age = initCanvas('#age_chart');
-  svg_age.call(tip);
+  // svg_age.call(tip);
   legend_age = initLegend(responses.age, z_green);
   appendText(svg_age, "Age", "#20BF55");
   svg_age.append("g")
@@ -453,7 +453,7 @@ function initialUpdateBars(){
     .attr("transform", "translate(0, 10)");
 
   svg_education = initCanvas('#education_chart');
-  svg_education.call(tip);
+  // svg_education.call(tip);
   legend_education = initLegend(responses.education, z_blue);
   appendText(svg_education, "Education", "#246EB9");
   svg_education.append("g")
@@ -461,7 +461,7 @@ function initialUpdateBars(){
     .attr("transform", "translate(0, 10)");
 
   svg_ethnicity = initCanvas('#ethnicity_chart');
-  svg_ethnicity.call(tip);
+  // svg_ethnicity.call(tip);
   legend_ethnicity = initLegend(responses.ethnicity, z_purple);
   appendText(svg_ethnicity, "Ethnicity", "#D30C7B");
   svg_ethnicity.append("g")
@@ -469,7 +469,7 @@ function initialUpdateBars(){
     .attr("transform", "translate(0, 10)");
 
   svg_height = initCanvas('#height_chart');
-  svg_height.call(tip);
+  // svg_height.call(tip);
   legend_height = initLegend(responses.height, z_pink);
   appendText(svg_height, "Height", "#FB8B24");
   svg_height.append("g")
@@ -477,7 +477,7 @@ function initialUpdateBars(){
     .attr("transform", "translate(0, 10)");
 
   svg_bodytype = initCanvas('#bodytype_chart');
-  svg_bodytype.call(tip);
+  // svg_bodytype.call(tip);
   legend_bodytype = initLegend(responses.bodytype, z_red);
   appendText(svg_bodytype, "Body Type", "#1B998B");
   svg_bodytype.append("g")
