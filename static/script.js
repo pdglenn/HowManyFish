@@ -368,6 +368,7 @@ var z_pink = d3.scale.linear()
 var z_red = d3.scale.linear()
   .domain([0, 4])
   .range(["#ECEBE4", "#1B998B"]);
+
 z_green = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#13D868", "#0EAF54"]);   //green
 z_blue = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#FF4C3F", "#B2352C"]);    //red-orange
 // z_purple = d3.scale.linear().domain([0, 3, 6]).range(["#ECEBE4", "#D80082", "#B2006B"]);  //pink
