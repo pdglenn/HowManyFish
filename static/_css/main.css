@@ -130,3 +130,9 @@ div[class^="col-md"] {
         float: left;
     }
 }
+
+.label{
+    font: 14px;
+    font-family: "Open Sans";
+    fill: #ffffff;
+}
