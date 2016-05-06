@@ -25,28 +25,34 @@
   stroke-width: 3px;
 }
 
-div.tooltip { 
+div.tooltip {
     position: absolute;     
     text-align: center;     
     width: 170px;          
-    height: 90px;         
+    height: 120px;
     padding: 2px;       
-    font: 12px sans-serif;    
-    background: lightsteelblue; 
+    font: 12px;
+    font-family: "Open Sans";
+    background: #3c99e5;
+    color: #ffffff;
     border: 0px;    
     border-radius: 8px;     
-    pointer-events: none;     
+    pointer-events: none;
+    vertical-align: middle;
 }
 
 div.bartip {
     position: absolute;
     text-align: center;
-    width: 170px;
-    height: 90px;
+    width: 120px;
+    height: 60px;
     padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
+    font: 14px;
+    font-family: "Open Sans";
+    background: #3c99e5;
+    color: #ffffff;
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
+    vertical-align: middle;
 }

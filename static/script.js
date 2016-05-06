@@ -62,14 +62,14 @@ mdef.append("pattern")
   .attr("id", "paul")
   .attr("x", 0)
   .attr("y", 0)
-  .attr("height", 2*radius*.07)
-  .attr("width", 2*radius*.07)
+  .attr("height", radius*.04)
+  .attr("width", radius*.04)
   .append("image")
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("width", 2*radius*.07)
-  .attr("height", 2*radius*.07)
-  .attr("xlink:href", "http://www.ischool.berkeley.edu/files/imagecache/profile-pic/linkedin_0.jpg");
+  .attr("x", -35)
+  .attr("y", -10)
+  .attr("width", 2*radius*.14)
+  .attr("height", 2*radius*.14)
+  .attr("xlink:href", "/static/paul.jpg");
 
 
 var drag = d3.behavior.drag()
@@ -122,10 +122,19 @@ ir.append("circle")
 
 var compat_text = d3.select("#circle_svg").append("text")
   .attr("id", "compat_text")
-  .attr("x", 20)
-  .attr("y", 20)
+  .attr("x", 25)
+  .attr("y", 75)
   .style("fill", "white")
+  .style('font-family', "Open Sans")
   .text("Compatibility Threshold: 50%");
+
+d3.select("#circle_svg").append("text")
+  .attr("id", "compat_text")
+  .attr("x", 25)
+  .attr("y", 55)
+  .style("fill", "white")
+  .style('font-family', "Open Sans")
+  .text("Drag the bold circle to change your threshold");
 
 // http://bl.ocks.org/mbostock/1557377
 // http://stackoverflow.com/questions/18571563/d3s-mouse-coordinates-relative-to-parent-element
@@ -240,7 +249,7 @@ function circleUpdateWithData(data){
     .on("mouseover", function(d) {    
     tooltip.transition()    
         .duration(200)    
-        .style("opacity", .9);    
+        .style("opacity", .9);
     tooltip.html(tooltipText(d))  
         .style("left", (d3.event.pageX) + "px")   
         .style("top", (d3.event.pageY) - 210 + "px");  
