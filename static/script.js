@@ -186,6 +186,7 @@ function updateColors(category) {
 
 function tooltipText(d){
   return "Username: " + d.username + "<br/>" + 
+         "Compatibility: " + Math.round(d.compatibility*100) + "%<br/>" +
          "Ethnicity: " + d.ethnicity_norm + "<br/>" + 
          "Body type: " + d.body_type_norm + "<br/>" +
          "Height: " + d.height_norm + "<br/>" + 
