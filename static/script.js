@@ -159,14 +159,18 @@ function pickColor(d, id) {
     'education': z_blue,
     'ethnicity': z_purple,
     'height': z_pink,
-    'bodytype': z_red};
+    'body_type': z_red};
 
-  category = id.split('#')[1].split('_')[0]
+  category = id.split('#')[1].split('_')[0];
   choices = responses[category];
+
+  if (category == 'bodytype'){
+    category = 'body_type';
+  }
+
   index = $.inArray(d[category + '_norm'], choices);
 
   if (index == -1) {
-
     return '#FFFFFF'
   }
 
