@@ -3,4 +3,6 @@
 *.csv
 profile_stats
 /__pycache__
+/calc_compatibility/index_*.html
+
 

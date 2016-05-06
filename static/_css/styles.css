@@ -1,0 +1,168 @@
+
+/*CSS needed for scrolling*/
+.page-content {
+	height:100%;
+}
+
+.section-content {
+	overflow:hidden;
+	height:100%;
+}
+
+/*CSS styling*/
+.text {
+	text-align:left;
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+/*	padding-left: 20px;
+*/}
+
+.title {
+/*	padding-top: 10px;
+*/	font-size:30px;
+	/*float:left;*/
+	/*position: absolute;*/
+/*	padding-left: 10px;
+*/}
+
+.title-blue {
+	color: #0A3C78;
+}
+
+.title-white {
+	color: white;
+}
+
+.page {
+	/*width: 5 0%;*/
+	/*float: left;*/
+	/*height: 100px;*/
+	/*height: 100%;*/
+	height: 100%;
+}
+
+#logo {
+	height: 100%;
+}
+
+#thoughts {
+	height: 100%;
+}
+
+#quotes {
+	width: 100%;
+}
+
+#test {
+	height: 100%;
+}
+
+#racial {
+	height: 100%;
+	width: 100%;
+}
+
+.background-color {
+	background-color: white;
+}
+
+.inner {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/*width: 900px;*/
+	/*height: 500px;*/
+	width: 100%;
+	height: 100%;
+}
+
+.outer {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	color: white;
+	/*position: relative;*/
+
+}
+
+#button-intro {
+	top: 89.5%;
+	left: 38.5%;
+	width: 20%;
+	height: 10%;
+}
+
+#button-end {
+	top: 85%;
+	left: 73%;
+	width: 20%;
+	height: 10%;
+}
+
+#button-intro-image {
+	height: 40px;
+	width: 180px;
+	background: #D30C7B;
+	background-image: url("/images/startexp_button.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	border: none;
+/*	font-style: 'Open Sans';
+	font-style: light;
+	font-size: 14pt;*/
+}
+
+#button-end-image {
+	height: 100px;
+	width: 270px;
+	background: #D30C7B;
+	background-image: url("/images/howmanyfish_startexp_button.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	
+	/*color: #3366CC;*/
+	border: none;
+}
+
+.chart1_style {
+	top: 38%;
+	left: 8%;
+	width: 40%;
+	height: 40%;
+}
+
+.chart2_style {
+	top: 38%;
+	left: 52%;
+	width: 40%;
+	height: 40%;
+}
+
+/*#screenshot {
+	/*width:200px; */
+	/*height:200px; */
+	/*left:75%;*/
+	/*right:75%;*/
+	/*position:fixed;*/
+	/*padding-right:"10px";*/
+	/*padding-top:"100px";*/
+	/*float: left;*/
+	/*width: 400px;*/
+	/*height: 500px;*/
+	/*background-color: blue;*/
+	/*height: 100%;*/
+	/*width: 100%;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+

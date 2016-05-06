@@ -1,0 +1,338 @@
+<!doctype html> 
+<html>
+<head>
+	<title>How Many Fish?</title>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=devide-width, initial-scale=1" />
+	<meta name="description" content="Visualizing OkCupid's Dating Algorithm and the Resulting Pool of Potential Matches" />
+	<meta name="keywords" content="online dating, algorithms" />
+
+ 	<!-- Load in css stylesheet -->
+	<link rel="stylesheet" href="styles.css" media="screen" type="text/css">
+
+	<!-- Font load in --> 
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
+	<!-- Load bootstrap stylesheet -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+    <!-- Load in css stylesheet for jquery fullpage (from Ricky/MIT) -->    
+    <link rel="stylesheet" href="jquery.fullPage.css" media="screen" type="text/css">
+
+    <!-- Create a link to highcharts -->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+    <!-- Load in jquery -->
+    <script src="jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+    <!-- d3 scripts necessary to run --> 
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.7.0/d3-legend.min.js"></script>
+
+    <!-- Scripts for including content -->
+    <!-- // <script>
+    // 	$(function() {
+    // 		$("#includeContent").load("placeholder.html");
+    // 	});
+    // </script> -->
+
+</head>
+
+
+<body>
+
+	<div class="page-content">
+		<div class="content">
+			<div id="fullpage">   
+
+				<!--Title -->
+				<div class="section">  
+					<div class="section-content background-color">
+							<div class="text">
+								<div class="outer">
+									<div class="inner" id="logo">
+										<!-- <h1 class="title">Narrative 1 here</h1> -->
+										<img src="/images/titlepage_resized.svg">
+									</div>
+									<div class="inner" id="button-intro" style="z-index: 2">
+										<a href="placeholder.html" class="btn btn-info btn-block btn-lg" id="button-intro-image" role="button"></a>
+									<!-- <button class="btn btn-default btn-block btn-lg">
+										<a a href="placeholder.html"></a>
+									     <img src="/images/howmanyfish_button.svg" width="200" />
+									</button> -->
+									</div>	
+								</div>
+							</div>
+					</div>
+				</div>
+
+				<!--Use Thoughts-->
+				<div class="section">  
+					<div class="section-content background-color">
+						<div class="text">
+							<div id="thoughts">
+								<!-- <h1 class="title title-blue">Does this look familiar?</h1> -->
+									<img src="/images/user_thoughts.png">
+							</div>
+						</div>
+						
+					</div>
+				</div>
+
+				<!--User Interviews-->
+				<div class="section">  
+					<div class="section-content background-color">
+						<div class="text">
+							<div id="quotes">
+								<!-- <h1 class="title title-blue">Does this look familiar?</h1> -->
+								<img src="/images/user_quotes.svg">
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!--Racial Profiling-->
+				<div class="section">  
+					<div class="section-content background-color">
+						<div class="text">
+							<div class="outer">
+								<div class="inner chart1_style" id="raceprefchart_1" style="z-index: 2"></div>
+								<div class="inner chart2_style" id="raceprefchart_2" style="z-index: 2"></div>
+								<div class="inner" id="racial" style="z-index: 1">
+									<img src="/images/racial_biases.svg">
+								</div>
+								<div class="inner" id="button-end" style="z-index: 1">
+									<!-- <a href="placeholder.html" class="btn btn-info btn-block btn-lg" id="button-image" role="button"></a> -->
+									<a href="placeholder.html" class="btn btn-default btn-block btn-lg" id="button-end-image" role="button"></a>
+									<!-- <button class="btn btn-default btn-block btn-lg">
+										<a a href="placeholder.html"></a>
+									     <img src="/images/howmanyfish_button.svg" width="200" />
+									</button> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Highcharts script -->
+	<script>
+
+    $(function () {
+
+      Highcharts.setOptions({
+        chart: {
+            style: {
+                fontFamily: 'Open Sans'
+            }
+        }
+      });
+
+      var chart1 = new Highcharts.Chart({
+     // $('#raceprefchart').highcharts({
+          
+          chart: {
+              type: 'heatmap',
+              renderTo: 'raceprefchart_1',
+              marginTop: 40,
+              marginBottom: 40,
+          },
+
+
+          title: {
+              text: 'Men Rating Women on OKCupid'
+          },
+
+          xAxis: {
+              categories: ['Asian women', 'Black women', 'Latina women', 'White women']
+          },
+
+          yAxis: {
+              categories: ['White men rate', 'Latino men rate', 'Black men rate', 'Asian men rate'],
+              title: null
+          },
+
+          colorAxis: {
+              // minColor: '#D30C7B',
+              // maxColor: '#20BF55',
+              reversed: false,
+              stops: [
+                    [0, '#D30C7B'],
+                    [.5, '#FFFFFF'],
+                    [1, '#20BF55']
+                    ],
+              min: -30,
+              max: 30
+          },
+
+          legend: {
+              align: 'right',
+              layout: 'vertical',
+              margin: 0,
+              verticalAlign: 'top',
+              y: 25,
+              symbolHeight: 320
+          },
+
+          tooltip: {
+              formatter: function () {
+                if (this.point.value >=0){
+                  return this.series.yAxis.categories[this.point.y] + ' ' + this.series.xAxis.categories[this.point.x] + ' <b>' + this.point.value + '</b>% more attractive than the average woman';
+                } else {
+                  return this.series.yAxis.categories[this.point.y] + ' ' + this.series.xAxis.categories[this.point.x] + ' <b>' + -this.point.value + '</b>% less attractive than the average woman';
+                };
+              }
+          },
+
+          series: [{
+              name: 'Ratings by race',
+              borderWidth: 1,
+              data: [[0,0,9],[0,1,4],[0,2,2],[0,3,15],
+                    [1,0,-17],[1,1,-18],[1,2,1],[1,3,-20],
+                    [2,0,3],[2,1,10],[2,2,2],[2,3,2],
+                    [3,0,6],[3,1,4],[3,2,-6],[3,3,3]],
+              dataLabels: {
+                  enabled: true,
+                  color: 'black',
+                  style: {
+                      textShadow: 'none'
+                  },
+                  formatter: function() {
+                    return this.point.value + '%';
+                  }
+              }
+          }]
+        });
+
+      var chart2 = new Highcharts.Chart({
+     // $('#raceprefchart').highcharts({
+          
+          chart: {
+              type: 'heatmap',
+              renderTo: 'raceprefchart_2',
+              marginTop: 40,
+              marginBottom: 40
+          },
+
+
+          title: {
+              text: 'Women Rating Men on OKCupid'
+          },
+
+          xAxis: {
+              categories: ['Asian men', 'Black men', 'Latino men', 'White men']
+          },
+
+          yAxis: {
+              categories: ['White women rate', 'Latina women rate', 'Black women rate', 'Asian women rate'],
+              title: null
+          },
+
+          colorAxis: {
+              reversed: false,
+              stops: [
+                    [0, '#D30C7B'],
+                    [.5, '#FFFFFF'],
+                    [1, '#20BF55']
+                    ],
+              min: -30,
+              max: 30
+          },
+
+          legend: {
+              align: 'right',
+              layout: 'vertical',
+              reversed: true,
+              margin: 0,
+              verticalAlign: 'top',
+              y: 25,
+              symbolHeight: 320
+          },
+
+          tooltip: {
+              formatter: function () {
+                if (this.point.value >=0){
+                  return this.series.yAxis.categories[this.point.y] + ' ' + this.series.xAxis.categories[this.point.x] + ' <b>' + this.point.value + '</b>% more attractive than the average man';
+                } else {
+                  return this.series.yAxis.categories[this.point.y] + ' ' + this.series.xAxis.categories[this.point.x] + ' <b>' + -this.point.value + '</b>% less attractive than the average man';
+                };
+              }
+          },
+
+          series: [{
+              name: 'Ratings by race',
+              borderWidth: 1,
+              data: [[0,0,-12],[0,1,-14],[0,2,-13],[0,3,24],
+                    [1,0,-8],[1,1,-16],[1,2,23],[1,3,-27],
+                    [2,0,1],[2,1,18],[2,2,-3],[2,3,-15],
+                    [3,0,19],[3,1,12],[3,2,-6],[3,3,18]],
+              dataLabels: {
+                  enabled: true,
+                  color: 'black',
+                  style: {
+                      textShadow: 'none'
+                  },
+                  formatter: function() {
+                    return this.point.value + '%';
+                  }
+              }
+          }]
+        });
+
+      });
+  	</script>
+	<!-- <script type="text/javascript" src="script.js"></script> -->
+
+	 <script>
+    $(document).ready(function(){
+        $('#fullpage').fullpage({
+            //options
+            anchors: ['How many fish', 'OkQupid Questions', 'User Interviews', 'Online Dating Biases'],
+            sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#D30C7B'],
+            navigation: true,
+            scrollOverflow: true,
+            navigationPosition: 'right',
+            navigationTooltips: ['How Many Fish', 'OkQupid Questions', 'User Interviews', 'Online Dating Biases'],
+
+            // afterLoad: function(anchorLink, index){
+            //     var loadedSection = $(this);
+
+            //     //slow load skill icons
+            //     if(anchorLink == 'skills'){
+            //         $(function(){
+            //             $('.skill-icon').each(function(currIcon){
+            //                 $(this).delay((currIcon++) * 500).fadeTo(1000, 1);
+            //             })
+            //         });
+            //     };
+            // }
+
+        });
+    });
+    </script>
+
+    <footer>
+	    <script type="text/javascript" src="jquery.easings.min.js"></script>
+	        
+	    <script type="text/javascript" src="jquery.slimscroll.min.js"></script>
+	        
+	    <script type="text/javascript" src="jquery.fullPage.min.js"></script>
+	        
+	    <script type="text/javascript" src="animations.js"></script>
+	</footer>
+
+
+</body>
+</html>
