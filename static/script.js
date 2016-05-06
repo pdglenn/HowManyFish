@@ -338,50 +338,39 @@ var barOuterPad = 0, barPad = .5;
 var x = d3.scale.ordinal().rangeRoundBands([0, w-50], barPad, barOuterPad);
 var y = d3.scale.linear().range([0, h-75]);
 
-// Age
-var z_green = d3.scale.linear()
-  .domain([0, 4])
-  .range(["#ECEBE4", "#20BF55"]);
-
-// var z_green = d3.scale.ordinal()
+// // Age
+// var z_green = d3.scale.linear()
 //   .domain([0, 4])
-//   .range(['#FFFFFF', '#20BF55','#EF946C','#D30C7B','#822E81']);
+//   .range(["#ECEBE4", "#20BF55"]);
 
-// Education
-var z_blue = d3.scale.linear()
-  .domain([0, 4])
-  .range(["#ECEBE4", "#246EB9"]);
-// var z_blue = d3.scale.ordinal()
+z_green = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#13D868", "#0EAF54"]);   //green
+
+// // Education
+// var z_blue = d3.scale.linear()
 //   .domain([0, 4])
-//   .range(['#ffffff', '#DBFE87','#FF6B35','#D2FF28','#9e9ac8']);
+//   .range(["#ECEBE4", "#246EB9"]);
+z_blue = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#FF4C3F", "#B2352C"]);    //red-orange
 
 // Ethnicity
-var z_purple = d3.scale.linear()
-  .domain([0, 6])
-  .range(["#ECEBE4", "#D30C7B"]);
-//
-// var z_purple = d3.scale.ordinal()
-//   .domain([0, 9])
-//   .range( ['#FFFFFF', '#0E84A1', '#FF6700 ', '#0496FF', '#A8981B',
-//     '#EAC435', '#1CC000 ', '#FE7C0D', '#5FC2F1', '#7CEA9C']);
-
+// var z_purple = d3.scale.linear()
+//   .domain([0, 6])
+//   .range(["#ECEBE4", "#D30C7B"]);
+// //
+z_purple = d3.scale.linear().domain([0, 3, 6]).range(["#ECEBE4", "#D80082", "#B2006B"]);  //pink
 // Height
-var z_pink = d3.scale.linear()
-  .domain([0, 4])
-  .range(["#ECEBE4", "#FB8B24"]);
 
-// var z_pink = d3.scale.ordinal()
+// var z_pink = d3.scale.linear()
 //   .domain([0, 4])
-//   .range(['#ffffff', '#A682FF','#61E294','#E3B505','#55C1FF']);
+//   .range(["#ECEBE4", "#FB8B24"]);
+
+z_pink = d3.scale.linear().domain([0, 2, 4]).range(["#ECEBE4", "#FB8B24", "#CC731A"]);    //yellow-orange
 
 // Body Type
-var z_red = d3.scale.linear()
-  .domain([0, 4])
-  .range(["#ECEBE4", "#1B998B"]);
-
-// var z_red = d3.scale.ordinal()
+// var z_red = d3.scale.linear()
 //   .domain([0, 4])
-//   .range(['#ffffff', '#20BF55','#FFE74C','#D30C7B','#FFB86F']);
+//   .range(["#ECEBE4", "#1B998B"]);
+
+z_red = d3.scale.linear().domain([0, 2, 4]).range(["#ECEBE4", "#17D4E5", "#11A5B2"]);        //teal
 
 var responses = {
   'age': ['not answered', 'over 45', '36 to 45',
