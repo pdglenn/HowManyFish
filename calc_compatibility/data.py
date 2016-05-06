@@ -20,9 +20,9 @@ import pandas as pd
 from random import sample
 import urllib
 
-response = 'calc_compatibility/fake_data_clean.csv'
-# url = 'http://people.ischool.berkeley.edu/~paul.glenn/i247s16/howmanyfishdata/fake_data_clean.csv'
-# response = urllib.request.urlopen(url)
+# response = 'calc_compatibility/fake_data_clean.csv'
+url = 'http://people.ischool.berkeley.edu/~paul.glenn/i247s16/howmanyfishdata/fake_data_clean.csv'
+response = urllib.request.urlopen(url)
 try:
   frame = pd.read_csv(response, low_memory=False)
 except OSError:
