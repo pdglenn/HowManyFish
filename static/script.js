@@ -171,7 +171,7 @@ function pickColor(d, id) {
   index = $.inArray(d[category + '_norm'], choices);
 
   if (index == -1) {
-    return '#FFFFFF'
+    return '#000000'
   }
 
   colorScale = colorList[category];
@@ -338,52 +338,63 @@ var barOuterPad = 0, barPad = .5;
 var x = d3.scale.ordinal().rangeRoundBands([0, w-50], barPad, barOuterPad);
 var y = d3.scale.linear().range([0, h-75]);
 
-// // Age
+// Age
 // var z_green = d3.scale.linear()
 //   .domain([0, 4])
 //   .range(["#ECEBE4", "#20BF55"]);
 
-z_green = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#13D868", "#0EAF54"]);   //green
 
-// // Education
+
+// Education
 // var z_blue = d3.scale.linear()
 //   .domain([0, 4])
 //   .range(["#ECEBE4", "#246EB9"]);
+
+
+//Ethnicity
+var z_purple = d3.scale.linear()
+  .domain([0, 6])
+  .range(["#ECEBE4", "#D30C7B"]);
+
+
+//Height
+
+var z_pink = d3.scale.linear()
+  .domain([0, 4])
+  .range(["#ECEBE4", "#FB8B24"]);
+
+
+//Body Type
+var z_red = d3.scale.linear()
+  .domain([0, 4])
+  .range(["#ECEBE4", "#1B998B"]);
+z_green = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#13D868", "#0EAF54"]);   //green
 z_blue = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#FF4C3F", "#B2352C"]);    //red-orange
+// z_purple = d3.scale.linear().domain([0, 3, 6]).range(["#ECEBE4", "#D80082", "#B2006B"]);  //pink
+// z_pink = d3.scale.linear().domain([0, 2, 4]).range(["#ECEBE4", "#FB8B24", "#CC731A"]);    //yellow-orange
+// z_red = d3.scale.linear().domain([0, 2, 4]).range(["#ECEBE4", "#17D4E5", "#11A5B2"]);        //teal
 
-// Ethnicity
-// var z_purple = d3.scale.linear()
-//   .domain([0, 6])
-//   .range(["#ECEBE4", "#D30C7B"]);
-// //
-z_purple = d3.scale.linear().domain([0, 3, 6]).range(["#ECEBE4", "#D80082", "#B2006B"]);  //pink
-// Height
-
-// var z_pink = d3.scale.linear()
-//   .domain([0, 4])
-//   .range(["#ECEBE4", "#FB8B24"]);
-
-z_pink = d3.scale.linear().domain([0, 2, 4]).range(["#ECEBE4", "#FB8B24", "#CC731A"]);    //yellow-orange
-
-// Body Type
-// var z_red = d3.scale.linear()
-//   .domain([0, 4])
-//   .range(["#ECEBE4", "#1B998B"]);
-
-z_red = d3.scale.linear().domain([0, 2, 4]).range(["#ECEBE4", "#17D4E5", "#11A5B2"]);        //teal
+// var responses = {
+//   'age': ['not answered', 'over 45', '36 to 45',
+//     '26 to 35', '18 to 25'],
+//   'education': ['not answered', 'advanced degree', 'bachelors degree',
+//     'some college', 'high school'],
+//   'ethnicity': ['not answered', 'other', 'Indicated 2 or more ethnicities',
+//     'white', 'hispanic / latin', 'black', 'asian', 'pacific islander',
+//     'native american', 'indian'],
+//   'height': ['not answered', "over 6'", "5'6 to 5'11",
+//     "5' to 5'5", "under 5'"],
+//   'bodytype': ['not answered', 'a little extra', 'ripped',
+//     'average', 'thin']
+// };
 
 var responses = {
-  'age': ['not answered', 'over 45', '36 to 45',
-    '26 to 35', '18 to 25'],
+  'age': ['not answered', "18 to 25", "26 to 35", "36 to 45", "over 45"],
   'education': ['not answered', 'advanced degree', 'bachelors degree',
     'some college', 'high school'],
-  'ethnicity': ['not answered', 'other', 'Indicated 2 or more ethnicities',
-    'white', 'hispanic / latin', 'black', 'asian', 'pacific islander',
-    'native american', 'indian'],
-  'height': ['not answered', "over 6'", "5'6 to 5'11",
-    "5' to 5'5", "under 5'"],
-  'bodytype': ['not answered', 'a little extra', 'ripped',
-    'average', 'thin']
+  'ethnicity': ['not answered', "indian", "native american", "pacific islander", "asian", "black", "hispanic / latin", "white", "Indicated 2 or more ethnicities", "other"],
+  'height': ['not answered', "under 5'", "5' to 5'5", "5'6 to 5'11", "over 6'"],
+  'bodytype': ['not answered', "thin", "average", "ripped", "a little extra"]
 };
 
 
