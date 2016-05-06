@@ -102,7 +102,7 @@
 	height: 40px;
 	width: 180px;
 	background: #D30C7B;
-	background-image: url("/images/startexp_button.svg");
+	background-image: url("/static/images/startexp_button.svg");
 	background-repeat: no-repeat;
 	background-position: center;
 	border: none;
@@ -115,7 +115,7 @@
 	height: 100px;
 	width: 270px;
 	background: #D30C7B;
-	background-image: url("/images/howmanyfish_startexp_button.svg");
+	background-image: url("/static/images/howmanyfish_startexp_button.svg");
 	background-repeat: no-repeat;
 	background-position: center;
 	

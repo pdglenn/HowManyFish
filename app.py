@@ -86,6 +86,11 @@ def ajax_test2():
     return render_template('ajax_test2.html')
 
 
+@app.route('/visualization')
+def visualization():
+    return render_template('index.html')
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
