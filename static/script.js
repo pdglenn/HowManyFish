@@ -281,9 +281,11 @@ function circleUpdateWithData(data){
 
 }
 
+// http://simeydotme.github.io/jQuery-ui-Slider-Pips/
+var options = ['Irrelevant: 0', 'A Little Important: 1', 'Somewhat Important: 10', 'Very Important: 250'];
 $(function() {
   for (var i = 1; i<11; i++){
-    $( "#slider"+i ).slider({
+    var slider = $( "#slider"+i ).slider({
       min: 1,
       max: 4,
       value: 2,
@@ -291,8 +293,14 @@ $(function() {
       change: function( event, ui ){
         circleUpdate();
       }
-    });
+    }).slider('float', {'labels': options});//, {
+    //   rest: 'label',
+    //   labels: options
+    // });
   }
+  //   var width = slider.width() / (options.length - 1);
+  //  // $("#slider"+i).after('<div class="ui-slider-legend"><p style="width:' + width + 'px;">' + options.join('</p><p style="width:' + width + 'px;">') +'</p></div>');
+  // }
 });
 
 
