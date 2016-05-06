@@ -1,6 +1,7 @@
 /* ---------------------------------------------------------------------------------------------------- */
 /* RESET CSS */
 
+
 /* 0. Resetting css is highly recommended; this overrides some default browser styles and allows you to 
 start from a "blank slate". See this page for more information (http://cssreset.com/) and copy in one
 of the versions below. */
@@ -53,94 +54,48 @@ table {
 
 /* 1. Set the page background to a color (ex. #eee for light gray) or to a background image.
 /* 2. Define the text font, size, color, boldness, and line height that will apply to the whole page. */
-body {
-    background: #0A3C78;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 14px;
+
+.Otari-HeavyItalic { 
+    font-family: Otari-HeavyItalic;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 22px;
 }
 
-h1, h2, h3, h4, h5 {
+.Open-Sans {
+    font-family: Open-Sans, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 22px;
+}
+
+body {
+    background: #0A3C78;
+    /*font-family: 'Open-Sans';*/
+    /*font-size: 14px;*/
+}
+
+h1, h2, h3, h5, h4 {
     text-align: center;
     vertical-align: center;
+    color: #FFFFFF;
+
 }
+
+
 
 /* ---------------------------------------------------------------------------------------------------- */
 /* STRUCTURE */
 
-.slide {
-/*    background-attachment: fixed;*/
-    height:auto;
-    position: relative;
-    vertical-align: center;
-}
-
-.slide h1 {
-    font-size: 3.8em;
-    margin: 0.1em 0;
-    line-height: 1em;
-    font-weight: 700;
-    color: #FFFFFF;
-    text-shadow: 2px 2px 8px #0A3C78;
-    text-align: center;
-}
-
-.slide h2 {
-    font-size: 2.0em;
-    color: #0A3C78;
-    text-align: left;
-}
-
-.slide p {
-    font-family: 'Lora';
-    font-size: 1.2em;
-    text-shadow: none;
-    color: #736F72;
-}
-
-.dark {
-    background-color: #0A3C78;
-/*    color: #ffffff;*/
-    width:100%;
-    padding:50px;
-}
-
-.light {
-    background-color: #FFFFFF;
-    padding: 10px;
-    width: 75%;
-    border: 1px solid #666;
-    left: 12.5%;
-}
-
-.image {
-    background-color: #0A3C78;
-    width: 75%;
-    left: 12.5%;
-}
-
-.image p {
-    font-family: 'Lora';
-    font-size: 1.2em;
-    text-shadow: none;
-    color: #FFFFFF;
-}
-
-.floatright
-{
-float: right;
-margin: 0 0 10px 10px;
-padding: 2px;
-}
-
 #container{
-    background: #ffffff;
+    background: #0A3C78;
 }
 
 div[class^="col-md"] {
     background: #0A3C78;
-    border-style: dashed;
-    border-width: 1px;
-    border-color: #eee;
+    color: #FFFFFF;
 }
 
 .col-xs-15,

@@ -3,12 +3,30 @@
 <head>
     <meta charset="UTF-8" />
     <title>How Many Fish?</title>
-    <!-- fuck -->
+    
     <!-- Create a link to the main.css stylesheet -->
     <link rel="stylesheet" href="static/_css/main.css" type="text/css" />
+    <link rel="stylesheet" href="static/circle.css" type="text/css" />
+    <!-- Create a link to font css files-->
+    <link rel="stylesheet" href="Otari_font/Otari.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans" type="text/css" />
     <!-- Create a link to the bootstrap -->
     <link rel="stylesheet" href="static/bootstrap/css/bootstrap.css" /> 
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.7.0/d3-legend.min.js"></script>
 
+    <style>
+      #scatter_plot{
+        min-height: 1045px;
+      }
+      .container{
+        float: left;
+      }
+    </style>
 </head>
 
 <body>
@@ -16,7 +34,7 @@
     <!-- Title row -->
     <div class="row">
       <div class="col-md-12" id="topTitle">
-        <h1 id="topHeader">How Many Fish?</h1>
+        <h1 id="topHeader"><img src="logo_banner.svg"></h1>
       </div>
     </div>
     <!-- Large containers row -->
@@ -24,15 +42,11 @@
       <div class="col-md-7" id="scatter_container">
         <div class="row">
           <div class="col-md-12" id="scatter_title">
-          <h4 id="scatterHeader">Your Pool</h4>
+          <h4 id="scatterHeader"><p class="Otari-HeavyItalic">Your Pool</h4>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12" id="scatter_plot">
-            SCATTER PLOT <br>
-            <p align=center>
-            <img src="http://www.dogoilpress.com/data/wallpapers/26/FDS_568904.jpg" width=425 height=425>
-            </p>
           </div>
         </div>
       </div>
@@ -40,87 +54,97 @@
         <!--Slider container row -->
         <div class="row">
           <div class="col-md-12" id="sliders_title">
-            <h4 id="slidersHeader">Question Importance Sliders</h4>
+            <h4 id="slidersHeader"><p class="Otari-HeavyItalic">Select the Importance of Each Question</h4><br>
           </div>
           <div class="col-md-12" id="sliders_container">
             <div class="row">
-              <div class="col-md-6" id="slider1">
-                SLIDER1
+              <div class="col-md-5" id="slider1">
+                <!-- SLIDER1 -->
               </div>
-              <div class="col-md-6" id="slider2">
-                SLIDER2
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6" id="slider1_title">
-                <h5>SLIDER1 NAME</h5>
-              </div>
-              <div class="col-md-6" id="slider2_title">
-                <h5>SLIDER2 NAME</h5>
+                  <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider2">
+                <!-- SLIDER2 -->
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6" id="slider3">
-                SLIDER3
+              <div class="col-md-5" id="slider1_title">
+                <h5><p class="Open-Sans">What is the worst personality trait someone can have?</h5>
               </div>
-              <div class="col-md-6" id="slider4">
-                SLIDER4
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6" id="slider3_title">
-                <h5>SLIDER3 NAME</h5>
-              </div>
-              <div class="col-md-6" id="slider4_title">
-                <h5>SLIDER4 NAME</h5>
+                    <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider2_title">
+                <h5><p class="Open-Sans">Do you ever get inspired to do something creative for no reason in particular?</h5>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6" id="slider5">
-                SLIDER5
+              <div class="col-md-5" id="slider3">
+                <!-- SLIDER3 -->
               </div>
-              <div class="col-md-6" id="slider6">
-                SLIDER6
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6" id="slider5_title">
-                <h5>SLIDER5 NAME</h5>
-              </div>
-              <div class="col-md-6" id="slider6_title">
-                <h5>SLIDER6 NAME</h5>
+                  <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider4">
+                <!-- SLIDER4 -->
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6" id="slider7">
-                SLIDER7
+              <div class="col-md-5" id="slider3_title">
+                <h5><p class="Open-Sans">What type of humor do you enjoy most?</h5>
               </div>
-              <div class="col-md-6" id="slider8">
-                SLIDER8
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6" id="slider7_title">
-                <h5>SLIDER7 NAME</h5>
-              </div>
-              <div class="col-md-6" id="slider8_title">
-                <h5>SLIDER8 NAME</h5>
+                  <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider4_title">
+                <h5><p class="Open-Sans">Are you very close to your family?</h5>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6" id="slider9">
-                SLIDER9
+              <div class="col-md-5" id="slider5">
+                <!-- SLIDER5 -->
               </div>
-              <div class="col-md-6" id="slider10">
-                SLIDER10
+                  <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider6">
+                <!-- SLIDER6 -->
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6" id="slider9_title">
-                <h5>SLIDER9 NAME</h5>
+              <div class="col-md-5" id="slider5_title">
+                <h5><p class="Open-Sans">Rate your self confidence.</h5>
               </div>
-              <div class="col-md-6" id="slider10_title">
-                <h5>SLIDER10 NAME</h5>
+                  <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider6_title">
+                <h5><p class="Open-Sans">Are you happy with your life?</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5" id="slider7">
+                <!-- SLIDER7 -->
+              </div>
+                    <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider8">
+                <!-- SLIDER8 -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5" id="slider7_title">
+                <h5><p class="Open-Sans">Which best describes your political beliefs?</h5>
+              </div>
+                <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider8_title">
+                <h5><p class="Open-Sans">How open are you to trying new things in bed?</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5" id="slider9">
+                <!-- SLIDER9 -->
+              </div>
+                    <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider10">
+                <!-- SLIDER10 -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5" id="slider9_title">
+                <h5><p class="Open-Sans">How often do you go out of your way to make other people feel appreciated?</h5>
+              </div>
+                    <div class="col-md-1"></div>
+              <div class="col-md-5" id="slider10_title">
+                <h5><p class="Open-Sans">Which would you rather be? Normal or Weird?</h5>
               </div>
             </div>
           </div>
@@ -128,9 +152,22 @@
         <!--Bars container row -->
         <div class="row">
           <div class="col-md-12" id="bars_title">
-            <h4 id="barsHeader">Pool Statistics</h4>
+            <h4 id="barsHeader"><p class="Otari-HeavyItalic">Profile Variable Statistics of Your Pool</h4><br>
           </div>
-          <div class="col-md-12" id="bars_container">
+        </div>
+        <div class="row">
+          <div id="bars_container">
+
+              <div id="age_chart" class="col-md-15"></div>
+              <div id="education_chart" class="col-md-15"></div>
+              <div id="ethnicity_chart" class="col-md-15"></div>
+              <div id="height_chart" class="col-md-15"></div>
+              <div id="bodytype_chart" class="col-md-15"></div>
+
+          </div>
+        </div>
+
+          <!--
             <div class="row">
               <div class="col-md-3" id="bar1">
                 BAR1
@@ -189,10 +226,13 @@
             </div>
           </div>
         </div>
+        -->
       </div>
     </div>
   </div>
-
+  <script src="static/script.js"></script>
+  
+ <!-- <script src="static/sliders.js"></script>  -->
 </body>
 
 </html>
