@@ -52,11 +52,11 @@ mdef.append("pattern")
   .attr("height", radius*.04)
   .attr("width", radius*.04)
   .append("image")
-  .attr("x", -40)
-  .attr("y", -20)
-  .attr("width", 2*radius*.14)
-  .attr("height", 2*radius*.14)
-  .attr("xlink:href", "/static/emily.jpeg");
+  .attr("x", -11)
+  .attr("y", -9)
+  .attr("width", 2*radius*.1)
+  .attr("height", 2*radius*.1)
+  .attr("xlink:href", "/static/images/your_pool.svg");
 
 mdef.append("pattern")
   .attr("id", "paul")
@@ -69,7 +69,7 @@ mdef.append("pattern")
   .attr("y", -10)
   .attr("width", 2*radius*.14)
   .attr("height", 2*radius*.14)
-  .attr("xlink:href", "/static/paul.jpg");
+  .attr("xlink:href", "/static/emily.jpeg");
 
 
 var drag = d3.behavior.drag()
@@ -120,6 +120,23 @@ ir.append("circle")
       .style("fill", "url(#emily)");
   });
 
+var axis = svg.append("g")
+  .attr("class", "a axis")
+  .selectAll("g")
+  .data([180])
+  .enter().append("g")
+  .attr("transform", function(d) {
+    return "rotate(" + -d + ")";
+  });
+axis.append("line")
+  .attr("x2", .93 * radius)
+  .attr("transform", "translate(" + .07 * radius + ",0)");
+
+axis.append("text")
+  .text("Compatibility")
+  .attr("transform", "rotate(180) translate(" + -.33*radius + ",-2)")
+  .attr("style", "fill: white; font-family: 'Open Sans';");
+
 var compat_text = d3.select("#circle_svg").append("text")
   .attr("id", "compat_text")
   .attr("x", 25)
@@ -134,7 +151,7 @@ d3.select("#circle_svg").append("text")
   .attr("y", 55)
   .style("fill", "white")
   .style('font-family', "Open Sans")
-  .text("Drag the bold circle to change your threshold");
+  .text("Drag the inner circle to change your threshold");
 
 // http://bl.ocks.org/mbostock/1557377
 // http://stackoverflow.com/questions/18571563/d3s-mouse-coordinates-relative-to-parent-element

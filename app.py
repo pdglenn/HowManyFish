@@ -91,6 +91,11 @@ def visualization():
     return render_template('index.html')
 
 
+@app.route('/index_QA')
+def index_qa():
+    return render_template('index_QA.html')
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
