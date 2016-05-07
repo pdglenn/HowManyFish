@@ -45,6 +45,9 @@
 }
 
 #thoughts {
+	top: 0px;
+	left: 0px;
+	width: 100%;
 	height: 100%;
 }
 
@@ -84,15 +87,22 @@
 
 }
 
+#OKC-screenshot {
+	top: 0px;
+	left: 0px;
+	width: 100px;
+	height: 100px;
+}
+
 #button-intro {
-	top: 87.5%;
+	top: 84.5%;
 	left: 38.5%;
 	width: 20%;
 	height: 10%;
 }
 
 #button-end {
-	top: 85%;
+	top: 83.5%;
 	left: 73%;
 	width: 20%;
 	height: 10%;
@@ -124,14 +134,14 @@
 }
 
 .chart1_style {
-	top: 35%;
+	top: 33%;
 	left: 8%;
 	width: 40%;
 	height: 40%;
 }
 
 .chart2_style {
-	top: 35%;
+	top: 33%;
 	left: 52%;
 	width: 40%;
 	height: 40%;

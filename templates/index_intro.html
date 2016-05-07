@@ -34,7 +34,7 @@
 
     <!-- d3 scripts necessary to run --> 
     <script src="https://d3js.org/d3.v3.min.js"></script>
-    <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    // <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.7.0/d3-legend.min.js"></script>
 
     <!-- Scripts for including content -->
@@ -78,10 +78,14 @@
 				<div class="section">  
 					<div class="section-content background-color">
 						<div class="text">
-							<div id="thoughts">
-								<!-- <h1 class="title title-blue">Does this look familiar?</h1> -->
-									<img src="/static/images/user_thoughts.png" width="1920">
-							</div>
+              <div class="outer">
+  							<div class="inner" id="thoughts" style="z-index: 2">
+  									<img src="/static/images/user_thoughts.svg">
+  							</div>
+                <!-- <div class="inner" id="OKC-screenshot" style="z-index: 1">
+                    <img src="/static/images/OKC_screenshot.svg">
+                </div> -->
+              </div>
 						</div>
 						
 					</div>
@@ -108,7 +112,7 @@
 								<div class="inner chart1_style" id="raceprefchart_1" style="z-index: 2"></div>
 								<div class="inner chart2_style" id="raceprefchart_2" style="z-index: 2"></div>
 								<div class="inner" id="racial" style="z-index: 1">
-									<img src="/static/images/racial_biases.svg" width="1920">
+									<img src="/static/images/racial_biases.svg">
 								</div>
 								<div class="inner" id="button-end" style="z-index: 1">
 									<!-- <a href="/visualization" class="btn btn-info btn-block btn-lg" id="button-image" role="button"></a> -->
@@ -156,7 +160,8 @@
           },
 
           xAxis: {
-              categories: ['Asian women', 'Black women', 'Latina women', 'White women']
+              categories: ['Asian women', 'Black women', 'Latina women', 'White women'],
+              // opposite: true
           },
 
           yAxis: {
@@ -196,6 +201,10 @@
               }
           },
 
+          exporting: {
+            enabled: false
+          },
+
           series: [{
               name: 'Ratings by race',
               borderWidth: 1,
@@ -228,11 +237,13 @@
 
 
           title: {
-              text: 'Women Rating Men on OkCupid'
+              text: 'Women Rating Men on OkCupid', 
           },
 
           xAxis: {
-              categories: ['Asian men', 'Black men', 'Latino men', 'White men']
+              categories: ['Asian men', 'Black men', 'Latino men', 'White men'],
+              // opposite: true,
+              rotation: 0
           },
 
           yAxis: {
@@ -269,6 +280,10 @@
                   return this.series.yAxis.categories[this.point.y] + ' ' + this.series.xAxis.categories[this.point.x] + ' <b>' + -this.point.value + '</b>% less attractive than the average man';
                 };
               }
+          },
+
+          exporting: {
+            enabled: false
           },
 
           series: [{

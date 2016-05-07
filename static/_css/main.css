@@ -65,10 +65,10 @@ table {
 .Open-Sans {
     font-family: Open-Sans, sans-serif;
     font-size: 12px;
-    font-style: normal;
+    font-style: normal, italic;
     font-variant: normal;
     font-weight: 300;
-    line-height: 22px;
+    line-height: 18px;
 }
 
 body {
@@ -83,7 +83,9 @@ h1, h2, h3, h5, h4 {
     color: #FFFFFF;
 
 }
-
+i { 
+    font-style: italic;
+}
 
 
 /* ---------------------------------------------------------------------------------------------------- */
