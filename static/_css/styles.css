@@ -1,7 +1,9 @@
 
 /*CSS needed for scrolling*/
 .page-content {
-	height:100%;
+	position: relative;
+	height: 100%;
+	width: 100%;
 }
 
 .section-content {
@@ -41,18 +43,22 @@
 }
 
 #logo {
+	top: 0%;
+	left: 0%;
+	width: 100%;
 	height: 100%;
 }
 
 #thoughts {
-	top: 0px;
-	left: 0px;
+	left: 0%;
 	width: 100%;
 	height: 100%;
 }
 
 #quotes {
+	left: 0%;
 	width: 100%;
+	height: 100%;
 }
 
 #test {
@@ -60,8 +66,9 @@
 }
 
 #racial {
-	height: 100%;
+	left: 0%;
 	width: 100%;
+	height: 100%;
 }
 
 .background-color {
@@ -69,9 +76,9 @@
 }
 
 .inner {
-	position: absolute;
-	top: 0px;
-	left: 0px;
+/*	position: absolute;*/
+/*	top: 0px;
+	left: 0px;*/
 	/*width: 900px;*/
 	/*height: 500px;*/
 	width: 100%;
@@ -95,22 +102,26 @@
 }
 
 #button-intro {
-	top: 84.5%;
+	position: absolute;
+	top: 20.5%;
 	left: 38.5%;
 	width: 20%;
 	height: 10%;
 }
 
 #button-end {
-	top: 83.5%;
+	position: absolute;
+	top: 95.5%;
 	left: 73%;
 	width: 20%;
 	height: 10%;
 }
 
 #button-intro-image {
-	height: 40px;
-	width: 180px;
+/*	height: 40px;
+	width: 180px;*/
+	width: 90%;
+	height: 15%;
 	background: #D30C7B;
 	background-image: url("/static/images/startexp_button.svg");
 	background-repeat: no-repeat;
@@ -122,8 +133,10 @@
 }
 
 #button-end-image {
-	height: 100px;
-	width: 270px;
+/*	height: 100px;
+	width: 270px;*/
+	width: 100%;
+	height: 30%;
 	background: #D30C7B;
 	background-image: url("/static/images/howmanyfish_startexp_button.svg");
 	background-repeat: no-repeat;
@@ -134,17 +147,19 @@
 }
 
 .chart1_style {
-	top: 33%;
+	position: absolute;
 	left: 8%;
+	top: 83%;
 	width: 40%;
-	height: 40%;
+	height: 10%;
 }
 
 .chart2_style {
-	top: 33%;
+	position: absolute;
+	top: 83%;
 	left: 52%;
 	width: 40%;
-	height: 40%;
+	height: 10%;
 }
 
 /*#screenshot {
