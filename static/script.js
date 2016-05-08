@@ -224,56 +224,49 @@ function dragend(d){
   circleUpdate();
 }
 
-var color = d3.scale.category20();
+var color = function() { return '#cfcfcf' }//d3.scale.category20();
 
-function pickColor(d, id) {
+// function pickColor(d, id) {
+//   var colorList = {//'age': z_green,
+//     'education': z_blue,
+//     'ethnicity': z_purple,
+//     'height': z_pink,
+//     'body_type': z_red};
+//
+//   category = id.split('#')[1].split('_')[0];
+//   choices = responses[category];
+//
+//   if (category == 'bodytype'){
+//     category = 'body_type';
+//   }
+//
+//   index = $.inArray(d[category + '_norm'], choices);
+//
+//   if (index == -1) {
+//     return '#000000'
+//   }
+//
+//   colorScale = colorList[category];
+//   return colorScale(index);
+// }
+
+function pickColor2(d, category, location) {
   var colorList = {//'age': z_green,
     'education': z_blue,
     'ethnicity': z_purple,
     'height': z_pink,
-    'body_type': z_red};
+    'body_type': z_red}
 
-  category = id.split('#')[1].split('_')[0];
-  choices = responses[category];
-
-  if (category == 'bodytype'){
-    category = 'body_type';
-  }
-
-  index = $.inArray(d[category + '_norm'], choices);
-
-  if (index == -1) {
-    return '#000000'
-  }
-
-  colorScale = colorList[category];
-  return colorScale(index);
-}
-
-function pickColor2(d, category, location) {
- // category = location.split('#')[1].split('_')[0];
- //  choices = responses[category];
- //
- //  if (category == 'bodytype'){
- //    category = 'body_type';
- //  }
- //
- //  if (index == -1) {
- //    return '#000000'
- //  }
-  console.log(d);
-  console.log('location: ' + location);
-  console.log('category: ' + category);
-  console.log('d.location: ' + d[location]);
-  ''
+  // if (location == 'bodytype'){
+  //   location = 'body_type';
+  // }
   if (d[location + '_norm'] == category){
-    return '#ffffff'
+    index = $.inArray(category, responses[location]);
+    colorScale = colorList[location];
+    return colorScale(index);
   } else {
-    return '#000000'
+    return ['#cfcfcf']
   }
-
-  colorScale = colorList[category];
-  return colorScale(index);
 }
 
 function updateColors(category) {
@@ -283,8 +276,6 @@ function updateColors(category) {
 }
 var gd;
 function updateColors2(d, chart) {
-  console.log('in updatecolors2');
-  console.log(d);
   gd = d;
   var category = d.category;
   var location = d.location;
@@ -619,7 +610,6 @@ function barsUpdateWithData(data){
   gChartList = chartList;
 
   for (var chart in chartList){
-    console.log('chart: ' + chart);
     if (chartList.hasOwnProperty(chart)){
       var svg = chartList[chart][0];
       var legend = chartList[chart][1];
