@@ -411,7 +411,7 @@ function circleUpdateWithData(data){
 }
 
 // http://simeydotme.github.io/jQuery-ui-Slider-Pips/
-var options = ['Irrelevant: OKCupid pts: 0', 'A Little Important: OKCupid pts: 1', 'Somewhat Important: OKCupid pts: 10', 'Very Important: OKCupid pts: 250'];
+var options = ['Irrelevant: OKCupid points: 0', 'A Little Important: OKCupid points: 1', 'Somewhat Important: OKCupid points: 10', 'Very Important: OKCupid points: 250'];
 $(function() {
   for (var i = 1; i<11; i++){
     var slider = $( "#slider"+i ).slider({
