@@ -5,7 +5,7 @@
 
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=devide-width, initial-scale=1" />
+  <meta name="viewport" content="width=divide-width, initial-scale=1" />
 	<meta name="description" content="Visualizing OkCupid's Dating Algorithm and the Resulting Pool of Potential Matches" />
 	<meta name="keywords" content="online dating, algorithms" />
 
@@ -13,14 +13,14 @@
 	<link rel="stylesheet" href="/static/_css/styles.css" media="screen" type="text/css">
 
 	<!-- Font load in --> 
-	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
 
 	<!-- Load bootstrap stylesheet -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 
     <!-- Load in css stylesheet for jquery fullpage (from Ricky/MIT) -->    
-    <link rel="stylesheet" href="static/_css/jquery.fullPage.css" media="screen" type="text/css">
+<!--     <link rel="stylesheet" href="/static/_css/jquery.fullPage.css" media="screen" type="text/css"> -->
 
     <!-- Create a link to highcharts -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -32,9 +32,14 @@
     <script src="/static/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
+    <script type="text/javascript" src="/static/jquery.easings.min.js"></script>    
+    <script type="text/javascript" src="/static/jquery.slimscroll.min.js"></script>      
+    <script type="text/javascript" src="/static/jquery.fullPage.min.js"></script>   
+    <script type="text/javascript" src="/static/animations.js"></script>
+
     <!-- d3 scripts necessary to run --> 
     <script src="https://d3js.org/d3.v3.min.js"></script>
-    // <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.7.0/d3-legend.min.js"></script>
 
     <!-- Scripts for including content -->
@@ -46,9 +51,7 @@
 
 </head>
 
-
 <body>
-
 	<div class="page-content">
 		<div class="content">
 			<div id="fullpage">   
@@ -103,7 +106,6 @@
 					</div>
 				</div>
 
-
 				<!--Racial Profiling-->
 				<div class="section">  
 					<div class="section-content background-color">
@@ -126,14 +128,11 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-
 	<!-- Highcharts script -->
 	<script>
-
     $(function () {
 
       Highcharts.setOptions({
@@ -173,6 +172,7 @@
               // minColor: '#D30C7B',
               // maxColor: '#20BF55',
               reversed: false,
+              tickInterval: 10,
               stops: [
                     [0, '#D30C7B'],
                     [.5, '#FFFFFF'],
@@ -188,7 +188,7 @@
               margin: 0,
               verticalAlign: 'top',
               y: 25,
-              symbolHeight: 320
+              symbolHeight: 160
           },
 
           tooltip: {
@@ -253,6 +253,7 @@
 
           colorAxis: {
               reversed: false,
+              tickInterval: 10,
               stops: [
                     [0, '#D30C7B'],
                     [.5, '#FFFFFF'],
@@ -269,7 +270,7 @@
               margin: 0,
               verticalAlign: 'top',
               y: 25,
-              symbolHeight: 320
+              symbolHeight: 160,
           },
 
           tooltip: {
@@ -310,7 +311,7 @@
   	</script>
 	<!-- <script type="text/javascript" src="script.js"></script> -->
 
-	 <script>
+	 <!-- <script>
     $(document).ready(function(){
         $('#fullpage').fullpage({
             //options
@@ -336,9 +337,9 @@
 
         });
     });
-    </script>
+    </script> -->
 
-    <footer>
+    <!-- <footer>
 	    <script type="text/javascript" src="/static/jquery.easings.min.js"></script>
 	        
 	    <script type="text/javascript" src="/static/jquery.slimscroll.min.js"></script>
@@ -346,8 +347,6 @@
 	    <script type="text/javascript" src="/static/jquery.fullPage.min.js"></script>
 	        
 	    <script type="text/javascript" src="/static/animations.js"></script>
-	</footer>
-
-
+	</footer> -->
 </body>
 </html>
