@@ -250,10 +250,48 @@ function pickColor(d, id) {
   return colorScale(index);
 }
 
+function pickColor2(d, category, location) {
+ // category = location.split('#')[1].split('_')[0];
+ //  choices = responses[category];
+ //
+ //  if (category == 'bodytype'){
+ //    category = 'body_type';
+ //  }
+ //
+ //  if (index == -1) {
+ //    return '#000000'
+ //  }
+  console.log(d);
+  console.log('location: ' + location);
+  console.log('category: ' + category);
+  console.log('d.location: ' + d[location]);
+  ''
+  if (d[location + '_norm'] == category){
+    return '#ffffff'
+  } else {
+    return '#000000'
+  }
+
+  colorScale = colorList[category];
+  return colorScale(index);
+}
+
 function updateColors(category) {
   var circles = svg.selectAll("circle.point").data(gData[0]);
   circles.transition()
     .attr("fill", function(d){ return pickColor(d, category)});
+}
+var gd;
+function updateColors2(d, chart) {
+  console.log('in updatecolors2');
+  console.log(d);
+  gd = d;
+  var category = d.category;
+  var location = d.location;
+
+  var circles = svg.selectAll("circle.point").data(gData[0]);
+  circles.transition()
+    .attr("fill", function(d){ return pickColor2(d, category, location)});
 }
 
 function tooltipText(d){
@@ -489,9 +527,10 @@ function initCanvas(id){
     .attr("height", h+legend_h)
     .append("svg:g")
     .attr("transform", "translate(10,460)")
-    .on("click", function() {
-      updateColors(id);
-    });
+    // .on("click", function() {
+    //   updateColors(id);
+    // });
+  ;
 }
 
 function initLegend(responses, colors){
@@ -580,12 +619,13 @@ function barsUpdateWithData(data){
   gChartList = chartList;
 
   for (var chart in chartList){
+    console.log('chart: ' + chart);
     if (chartList.hasOwnProperty(chart)){
       var svg = chartList[chart][0];
       var legend = chartList[chart][1];
       var color = chartList[chart][2];
 
-      var rects = svg.selectAll('rect.valgroup').data(stacked[chart]);
+      var rects = svg.selectAll('rect.'+chart).data(stacked[chart]);
 
       rects.enter()
         .append('rect')
@@ -593,7 +633,7 @@ function barsUpdateWithData(data){
         .attr('y', function(d) { return -y(d.y0) - y(d.y) })
         .attr('height', function(d) { return y(d.y) })
         .attr('width', w)
-        .attr('class', 'valgroup')
+        .attr('class', chart)
         .style('fill', function(d, i){ return color(i) })
         .style('stroke', function(d, i) {
           return d3.rgb(color(i)).darker();
@@ -610,7 +650,11 @@ function barsUpdateWithData(data){
               bartip.transition()
                 .duration(500)
                 .style("opacity", 0);
-            });
+            })
+        .on("click", function(d){
+          updateColors2(d, chart);
+        });
+
         // .transition()
         // .duration(1500)
         // .attr('height', function(d) { return y(d.y) });
@@ -644,7 +688,8 @@ function stackData(data) {
           'category': responses[cat][i],
           'x': 0,
           'y': height,
-          'y0': y0
+          'y0': y0,
+          'location': cat
         };
         y0 += g.y;
         f.push(g);
