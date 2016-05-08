@@ -227,7 +227,7 @@ function dragend(d){
 var color = d3.scale.category20();
 
 function pickColor(d, id) {
-  var colorList = {'age': z_green,
+  var colorList = {//'age': z_green,
     'education': z_blue,
     'ethnicity': z_purple,
     'height': z_pink,
@@ -398,7 +398,7 @@ $(function() {
 var h = 500;
 var legend_h = 250;
 
-var w = $('.col-md-15').width()-10;
+var w = $('#bars_container').width() / 4 - 30;
 
 var barContainer = d3.select('#bars_container');
 var tip;
@@ -443,9 +443,18 @@ var z_red = d3.scale.linear()
 
 z_green = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#13D868", "#0EAF54"]);   //green
 z_blue = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#FF4C3F", "#B2352C"]);    //red-orange
+
 // z_purple = d3.scale.linear().domain([0, 3, 6]).range(["#ECEBE4", "#D80082", "#B2006B"]);  //pink
 // z_pink = d3.scale.linear().domain([0, 2, 4]).range(["#ECEBE4", "#FB8B24", "#CC731A"]);    //yellow-orange
 // z_red = d3.scale.linear().domain([0, 2, 4]).range(["#ECEBE4", "#17D4E5", "#11A5B2"]);        //teal
+
+//d3 20 colors
+//
+// z_blue = d3.scale.ordinal().range(["#ffffff", "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]);
+// z_purple = d3.scale.ordinal().range(["#ffffff","#aec7e8", "#ffbb78", "#98df8a", "#ff9896", "#c5b0d5", "#c49c94", "#f7b6d2", "#c7c7c7", "#dbdb8d"]);
+//   z_pink = d3.scale.ordinal().range(["#ffffff", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f"]);
+//     z_red = d3.scale.ordinal().range(["#ffffff", "#dbdb8d", "#17becf", "#9edae5"]);
+
 
 // var responses = {
 //   'age': ['not answered', 'over 45', '36 to 45',
@@ -528,7 +537,7 @@ function initialUpdateBars(){
   svg_education = initCanvas('#education_chart');
   // svg_education.call(tip);
   legend_education = initLegend(responses.education, z_blue);
-  appendText(svg_education, "Education", "#246EB9");
+  appendText(svg_education, "Education", "#8C3228");
   svg_education.append("g")
     .attr("class", "legend_education")
     .attr("transform", "translate(0, 10)");
