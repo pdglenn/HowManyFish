@@ -71,6 +71,36 @@ mdef.append("pattern")
   .attr("height", 2*radius*.14)
   .attr("xlink:href", "/static/emily.jpeg");
 
+// http://bl.ocks.org/tomgp/d59de83f771ca2b6f1d4
+mdef.append("marker")
+  .attr({
+    "id":"arrow_right",
+    "viewBox":"0 -5 10 10",
+    "refX":5,
+    "refY":0,
+    "markerWidth":4,
+    "markerHeight":4,
+    "orient":"auto"
+  })
+  .append("path")
+  .attr("d", "M0,-5L10,0L0,5")
+  .attr("style", "stroke: white; fill: white")
+  .attr("class","a axis");
+
+mdef.append("marker")
+  .attr({
+    "id":"arrow_left",
+    "viewBox":"0 -5 10 10",
+    "refX":5,
+    "refY":0,
+    "markerWidth":4,
+    "markerHeight":4,
+    "orient":"auto-start-reverse"
+  })
+  .append("path")
+  .attr("d", "M0,-5L10,0L0,5")
+  .attr("style", "stroke: white; fill: white")
+  .attr("class","a axis");
 
 var drag = d3.behavior.drag()
   .origin(function(d) { return d; })
@@ -96,7 +126,7 @@ var dr = svg.append("g")
 dr.append("circle")
   .attr('id', 'threshold')
   .attr("r", r(.5))
-  .attr("stroke-width", 5)
+  .attr("stroke-width", 8)
   .attr("cursor", "move")
   .call(drag);
 
@@ -130,12 +160,34 @@ var axis = svg.append("g")
   });
 axis.append("line")
   .attr("x2", .93 * radius)
+  .attr("style", "stroke-dasharray: 6")
   .attr("transform", "translate(" + .07 * radius + ",0)");
 
+
+
 axis.append("text")
-  .text("Compatibility")
+  .text("Compatibility %")
+  .attr("id", "radial-axis")
   .attr("transform", "rotate(180) translate(" + -.33*radius + ",-2)")
   .attr("style", "fill: white; font-family: 'Open Sans';");
+
+var doubleArrow = svg.append("g")
+  .attr("class", "a axis")
+  .selectAll("g")
+  .data([90])
+  .enter().append("g");
+  // .attr("transform", function(d) {
+  //   return "rotate(" + d + ")";
+  // });
+doubleArrow.append("line")
+  .attr("id", "doubleArrow")
+  .attr("x2", .1 * radius)
+  .attr("stroke-width", "5")
+  .attr("marker-start", "url(#arrow_left)")
+  .attr("marker-end", "url(#arrow_right)")
+  .attr("transform", "translate(" + (radius/2 - 6)  + ",0)")
+;
+
 
 var compat_text = d3.select("#circle_svg").append("text")
   .attr("id", "compat_text")
@@ -163,6 +215,9 @@ function dragmove(d){
     .attr("r", radius);
   threshold = Math.round(r.invert($('#threshold').attr("r")) * 100);
   compat_text.text("Compatibility Threshold: " + threshold + "%");
+
+  d3.select("#doubleArrow")
+    .attr("transform", "translate("+ (radius - 20) + ", 0)");
 }
 
 function dragend(d){
@@ -339,11 +394,11 @@ $(function() {
 
 //----------------------------
 
-var w = 160,
-h = 500;
+//var w = 160,
+var h = 500;
 var legend_h = 250;
 
-w = a=$('.col-md-15').width()-10;
+var w = $('.col-md-15').width()-10;
 
 var barContainer = d3.select('#bars_container');
 var tip;
@@ -407,7 +462,7 @@ z_blue = d3.scale.linear().domain([0, 3, 4]).range(["#ECEBE4", "#FF4C3F", "#B235
 // };
 
 var responses = {
-  'age': ['not answered', "18 to 25", "26 to 35", "36 to 45", "over 45"],
+ // 'age': ['not answered', "18 to 25", "26 to 35", "36 to 45", "over 45"],
   'education': ['not answered', 'advanced degree', 'bachelors degree',
     'some college', 'high school'],
   'ethnicity': ['not answered', "indian", "native american", "pacific islander", "asian", "black", "hispanic / latin", "white", "Indicated 2 or more ethnicities", "other"],
@@ -462,13 +517,13 @@ function initialUpdateBars(){
 //         return d.category + ": <span style='color:white'>" + Math.round(d.y*100).toFixed(0) + "%";
 //     });
 
-  svg_age = initCanvas('#age_chart');
-  // svg_age.call(tip);
-  legend_age = initLegend(responses.age, z_green);
-  appendText(svg_age, "Age", "#20BF55");
-  svg_age.append("g")
-    .attr("class", "legend_age")
-    .attr("transform", "translate(0, 10)");
+  // svg_age = initCanvas('#age_chart');
+  // // svg_age.call(tip);
+  // legend_age = initLegend(responses.age, z_green);
+  // appendText(svg_age, "Age", "#20BF55");
+  // svg_age.append("g")
+  //   .attr("class", "legend_age")
+  //   .attr("transform", "translate(0, 10)");
 
   svg_education = initCanvas('#education_chart');
   // svg_education.call(tip);
@@ -508,7 +563,7 @@ var gChartList;
 function barsUpdateWithData(data){
   var stacked = stackData(data);
   gStack = stacked;
-  var chartList = {'age': [svg_age, legend_age, z_green],
+  var chartList = {//'age': [svg_age, legend_age, z_green],
     'education': [svg_education, legend_education, z_blue],
     'ethnicity': [svg_ethnicity, legend_ethnicity, z_purple],
     'height': [svg_height, legend_height, z_pink],
