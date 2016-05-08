@@ -249,19 +249,33 @@ var color = function() { return '#cfcfcf' }//d3.scale.category20();
 //   colorScale = colorList[category];
 //   return colorScale(index);
 // }
-
+var globalD;
+var globalBTL;
 function pickColor2(d, category, location) {
+  globalD = d;
   var colorList = {//'age': z_green,
     'education': z_blue,
     'ethnicity': z_purple,
     'height': z_pink,
-    'body_type': z_red}
+    'bodytype': z_red};
 
-  // if (location == 'bodytype'){
-  //   location = 'body_type';
-  // }
-  if (d[location + '_norm'] == category){
+  console.log('location1: ' +location);
+  var bt_loc = location;
+  if (location == 'bodytype'){
+    bt_loc = 'body_type_norm';
+  } else {
+      bt_loc = location + '_norm';
+  }
+  console.log('location: ' + location);
+  console.log('category: ' + category);
+  console.log(d);
+  console.log('d.location: ' + d[location]);
+  console.log('bt_location: '+ bt_loc);
+  console.log('d.bt_location: ' + d[bt_loc]);
+  globalBTL = bt_loc;
+  if (d[bt_loc] == category){
     index = $.inArray(category, responses[location]);
+    console.log('index: '+index);
     colorScale = colorList[location];
     return colorScale(index);
   } else {
@@ -274,7 +288,7 @@ function updateColors(category) {
   circles.transition()
     .attr("fill", function(d){ return pickColor(d, category)});
 }
-var gd;
+
 function updateColors2(d, chart) {
   gd = d;
   var category = d.category;
@@ -286,12 +300,12 @@ function updateColors2(d, chart) {
 }
 
 function tooltipText(d){
-  return "Username: " + d.username + "<br/>" + 
+  return "Username: " + d.username + "<br/>" +
          "Compatibility: " + Math.round(d.compatibility*100) + "%<br/>" +
-         "Ethnicity: " + d.ethnicity_norm + "<br/>" + 
+         "Ethnicity: " + d.ethnicity_norm + "<br/>" +
          "Body type: " + d.body_type_norm + "<br/>" +
-         "Height: " + d.height_norm + "<br/>" + 
-         "Age: " + d.age_norm + "<br/>" + 
+         "Height: " + d.height_norm + "<br/>" +
+         "Age: " + d.age_norm + "<br/>" +
          "Education: " + d.education_norm
 }
 
@@ -352,18 +366,18 @@ function circleUpdateWithData(data){
       var coors = line([[i, 0]]).slice(1).slice(0, -1);
       return "translate(" + coors + ")"
     })
-    .on("mouseover", function(d) {    
-    tooltip.transition()    
-        .duration(200)    
+    .on("mouseover", function(d) {
+    tooltip.transition()
+        .duration(200)
         .style("opacity", .9);
-    tooltip.html(tooltipText(d))  
-        .style("left", (d3.event.pageX) + "px")   
-        .style("top", (d3.event.pageY) - 210 + "px");  
-    })          
-  .on("mouseout", function(d) {   
-    tooltip.transition()    
-        .duration(500)    
-        .style("opacity", 0); 
+    tooltip.html(tooltipText(d))
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY) - 210 + "px");
+    })
+  .on("mouseout", function(d) {
+    tooltip.transition()
+        .duration(500)
+        .style("opacity", 0);
   })
   .transition()
     .duration(1500)
@@ -432,7 +446,7 @@ var w = $('#bars_container').width() / 4 - 30;
 var barContainer = d3.select('#bars_container');
 var tip;
 var svg_age, svg_education, svg_ethnicity, svg_height, svg_bodytype;
-var legend_age, legend_education, legend_ethnicity, 
+var legend_age, legend_education, legend_ethnicity,
   legend_height, legend_bodytype;
 var barOuterPad = 0, barPad = .5;
 
