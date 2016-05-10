@@ -34,7 +34,8 @@
 
     <script type="text/javascript" src="/static/jquery.easings.min.js"></script>    
     <script type="text/javascript" src="/static/jquery.slimscroll.min.js"></script>      
-    <script type="text/javascript" src="/static/jquery.fullPage.min.js"></script>
+    <script type="text/javascript" src="/static/jquery.fullPage.min.js"></script>   
+    <script type="text/javascript" src="/static/animations.js"></script>
 
     <!-- d3 scripts necessary to run --> 
     <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -52,9 +53,6 @@
 
 <body>
 	<div class="page-content">
-		<div class="content">
-			<div id="fullpage">   
-
 				<!--Title -->
 				<div class="section">  
 					<div class="section-content background-color">
@@ -138,9 +136,7 @@
               </div>
             </div>
           </div>
-        </div>
-			</div>
-		</div>
+		    </div>
 	</div>
 	<!-- Highcharts script -->
 	<script>
@@ -320,43 +316,6 @@
 
       });
   	</script>
-	<!-- <script type="text/javascript" src="script.js"></script> -->
-
-	 <!-- <script>
-    $(document).ready(function(){
-        $('#fullpage').fullpage({
-            //options
-            anchors: ['How many fish', 'OkCupid Questions', 'User Interviews', 'Online Dating Biases'],
-            sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2', '#D30C7B'],
-            navigation: true,
-            scrollOverflow: true,
-            navigationPosition: 'right',
-            navigationTooltips: ['How Many Fish', 'OkCupid Questions', 'User Interviews', 'Online Dating Biases'],
-
-            // afterLoad: function(anchorLink, index){
-            //     var loadedSection = $(this);
-
-            //     //slow load skill icons
-            //     if(anchorLink == 'skills'){
-            //         $(function(){
-            //             $('.skill-icon').each(function(currIcon){
-            //                 $(this).delay((currIcon++) * 500).fadeTo(1000, 1);
-            //             })
-            //         });
-            //     };
-            // }
-
-        });
-    });
-    </script> -->
-
-    <!-- <footer>
-	    <script type="text/javascript" src="/static/jquery.easings.min.js"></script>
-	        
-	    <script type="text/javascript" src="/static/jquery.slimscroll.min.js"></script>
-	        
-	    <script type="text/javascript" src="/static/jquery.fullPage.min.js"></script>
-	        
-	</footer> -->
+    
 </body>
 </html>

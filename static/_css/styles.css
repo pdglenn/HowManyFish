@@ -1,22 +1,24 @@
 
+html, body {
+	background: #3366CC;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
 /*CSS needed for scrolling*/
 .page-content {
 	position: relative;
 	height: 100%;
 	width: 100%;
-}
-
-.section-content {
-	overflow:hidden;
-	height:100%;
+	background-color: #3366CC;
 }
 
 /*CSS styling*/
 .text {
 	text-align:left;
 	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
-/*	padding-left: 20px;
-*/}
+}
 
 .title {
 /*	padding-top: 10px;
@@ -40,6 +42,7 @@
 	/*height: 100px;*/
 	/*height: 100%;*/
 	height: 100%;
+	background-color: #3366CC;
 }
 
 #logo {
@@ -49,29 +52,7 @@
 	height: 100%;
 }
 
-#thoughts {
-	left: 0%;
-	width: 100%;
-	height: 100%;
-}
-
-#quotes {
-	left: 0%;
-	width: 100%;
-	height: 100%;
-}
-
-#test {
-	height: 100%;
-}
-
-#racial {
-	left: 0%;
-	width: 100%;
-	height: 100%;
-}
-
-#algorithms {
+#thoughts, #quotes, #racial, #algorithms {
 	left: 0%;
 	width: 100%;
 	height: 100%;
@@ -82,11 +63,6 @@
 }
 
 .inner {
-/*	position: absolute;*/
-/*	top: 0px;
-	left: 0px;*/
-	/*width: 900px;*/
-	/*height: 500px;*/
 	width: 100%;
 	height: 100%;
 }
@@ -96,8 +72,6 @@
 	height: 100%;
 	background-color: white;
 	color: white;
-	/*position: relative;*/
-
 }
 
 #OKC-screenshot {
@@ -124,8 +98,6 @@
 }
 
 #button-intro-image {
-/*	height: 40px;
-	width: 180px;*/
 	width: 90%;
 	height: 12%;
 	background: #D30C7B;
@@ -133,57 +105,33 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	border: none;
-/*	font-style: 'Open Sans';
-	font-style: light;
-	font-size: 14pt;*/
 }
 
 #button-end-image {
-/*	height: 100px;
-	width: 270px;*/
 	width: 100%;
 	height: 25%;
 	background: #D30C7B;
 	background-image: url("/static/images/howmanyfish_startexp_button.svg");
 	background-repeat: no-repeat;
 	background-position: center;
-	
-	/*color: #3366CC;*/
 	border: none;
 }
 
 .chart1_style {
 	position: absolute;
 	left: 8%;
-	top: 68%;
-	width: 40%;
-	height: 7%;
+	top: 67%;
+	width: 44%;
+	height: 8%;
 }
 
 .chart2_style {
 	position: absolute;
-	top: 68%;
+	top: 67%;
 	left: 52%;
-	width: 40%;
-	height: 7%;
+	width: 44%;
+	height: 8%;
 }
-
-/*#screenshot {
-	/*width:200px; */
-	/*height:200px; */
-	/*left:75%;*/
-	/*right:75%;*/
-	/*position:fixed;*/
-	/*padding-right:"10px";*/
-	/*padding-top:"100px";*/
-	/*float: left;*/
-	/*width: 400px;*/
-	/*height: 500px;*/
-	/*background-color: blue;*/
-	/*height: 100%;*/
-	/*width: 100%;*/
-/*}*/
-
 
 
 
