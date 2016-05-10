@@ -266,12 +266,6 @@ function pickColor2(d, category, location) {
   } else {
       bt_loc = location + '_norm';
   }
-  console.log('location: ' + location);
-  console.log('category: ' + category);
-  console.log(d);
-  console.log('d.location: ' + d[location]);
-  console.log('bt_location: '+ bt_loc);
-  console.log('d.bt_location: ' + d[bt_loc]);
   globalBTL = bt_loc;
   if (d[bt_loc] == category){
     index = $.inArray(category, responses[location]);
